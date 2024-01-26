@@ -1,6 +1,7 @@
 plugins {
     id("org.danilopianini.git-sensitive-semantic-versioning") version "0.1.0"
     id("java")
+    
 }
 
 group = "org.example"
