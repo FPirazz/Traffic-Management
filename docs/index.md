@@ -34,8 +34,8 @@ Il gioco consiste nel guidare un soldato, con una pistola e 10 bombe a mano nell
 - Creazione di una versione multiplayer distribuita.
 
 # Link alle pagine della repo.
-1. [Report di SAP](#).
-2. [Report di SPE](#).
+1. [Report di SAP](./SPA/index.md).
+2. [Report di SPE](./SPE/index.md).
    
 ## Contributors
 
