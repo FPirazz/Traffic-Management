@@ -9,10 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout project sources
-        uses: actions/checkout@v3
-      - name: Change to correct directory
-        run: cd Traffic_Management_System
+        uses: actions/checkout@v4
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3
-      - name: Run build with Gradle Wrapper
+        uses: gradle/gradle-build-action@v2
+      - name: Execute Gradle build
         run: ./gradlew build
