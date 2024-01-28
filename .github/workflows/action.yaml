@@ -1,5 +1,4 @@
 name: Build Gradle project
-
 on:
   push:
     branches:
