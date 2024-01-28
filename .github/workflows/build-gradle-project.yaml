@@ -13,4 +13,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
       - name: Execute Gradle build
-        run: ./gradlew build
+        run: if ["$RUNNER_OS" == "Linux" || "$RUNNER_OS" == "macOS"]; then
+                ./gradlew build
+             elif ["$RUNNER_OS" == "Windows" || "$RUNNER_OS" == "macOS"]; then
+                .\gradlew.bat build
+             else
+              echo "$RUNNER_OS not supported"
+              exit 1
+             fi
