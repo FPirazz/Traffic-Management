@@ -1,3 +1,4 @@
+#Defining an admin user for the Kubernetes Dashboard.
 apiVersion: v1
 kind: ServiceAccount
 metadata:
