@@ -4,11 +4,23 @@ plugins {
     jacoco
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
-
 repositories {
     mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+}
+
+allprojects {
+    group = "org.SPE_SAP"
+    version = "0.0.1-SNAPSHOT"
+
+
+    repositories {
+        mavenCentral()
+    }
+
 }
 
 dependencies {
