@@ -11,12 +11,12 @@ dependencyManagement {
 }
 
 dependencies {
-    testImplementation("com.h2database:h2:2.2.224")
+    implementation("com.h2database:h2")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-hateoas")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.withType<Test> {
