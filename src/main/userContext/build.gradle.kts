@@ -11,6 +11,7 @@ dependencyManagement {
 }
 
 dependencies {
+    testImplementation("com.h2database:h2:2.2.224")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-hateoas")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
