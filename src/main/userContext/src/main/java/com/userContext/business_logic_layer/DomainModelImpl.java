@@ -10,7 +10,7 @@ public class DomainModelImpl implements DomainModel{
     private Map<String, User> users;
     static Logger logger = Logger.getLogger("[DomainModel]");
     @Override
-    public void addNewUser(String name, String surname) {
+    public void addNewUser(final String id, final String name, final String surname, final String role) {
 
     }
 
