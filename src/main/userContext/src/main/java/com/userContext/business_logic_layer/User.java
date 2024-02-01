@@ -1,8 +1,17 @@
 package com.userContext.business_logic_layer;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+import java.io.Serializable;
 import java.util.Objects;
 
-public class User {
+@Entity
+public class User implements Serializable {
+
+    @Id
+    @GeneratedValue
     private Long id;
     private String name;
     private String surname;
@@ -11,6 +20,10 @@ public class User {
         this.name = name;
         this.surname = surname;
         this.role = role;
+    }
+
+    public User() {
+
     }
 
     public void saveUser() {
