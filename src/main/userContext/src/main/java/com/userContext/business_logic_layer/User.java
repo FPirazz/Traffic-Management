@@ -13,6 +13,15 @@ public class User {
         this.role = role;
     }
 
+    public void saveUser() {
+        try {
+            DomainModelImpl.getDataSourcePort().saveUser();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+    }
+
     public Long getId() {
         return id;
     }
