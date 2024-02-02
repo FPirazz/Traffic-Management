@@ -1,9 +1,7 @@
-package com.userContext.infrastructure_layer.ui;
+package com.userContext.infrastructure_layer.springBoot;
 
 import com.userContext.business_logic_layer.User;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class WebController {
