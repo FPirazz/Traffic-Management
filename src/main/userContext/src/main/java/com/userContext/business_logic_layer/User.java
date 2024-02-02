@@ -10,7 +10,7 @@ import java.util.Objects;
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "USER_SEQ")
     @SequenceGenerator(name = "USER_SEQ", sequenceName = "USER_SEQ", allocationSize = 1)
     private Long id;
     @Column(nullable = false)
@@ -18,8 +18,8 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String surname;
     @Column(nullable = false)
-    private String role;
-    public User(final String name, final String surname, final String role) {
+    private UserRole role;
+    public User(final String name, final String surname, final UserRole role) {
         this.name = name;
         this.surname = surname;
         this.role = role;
@@ -47,7 +47,7 @@ public class User implements Serializable {
     public String getSurname() {
         return surname;
     }
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
@@ -60,7 +60,7 @@ public class User implements Serializable {
     public void setSurname(String surname) {
         this.surname = surname;
     }
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
@@ -77,5 +77,13 @@ public class User implements Serializable {
         return Objects.hash(id, name, surname, role);
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", role=" + role +
+                '}';
+    }
 }
