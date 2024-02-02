@@ -4,6 +4,8 @@ import com.userContext.business_logic_layer.User;
 import com.userContext.infrastructure_layer.springBoot.exceptions.UserNotFoundException;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,43 +31,50 @@ public class WebController {
         List<EntityModel<User>> user = repo.findAll().stream()
                 .map(assembler::toModel)
                 .collect(Collectors.toList());
-
         return CollectionModel.of(user, linkTo(methodOn(WebController.class).all()).withSelfRel());
     }
     @GetMapping("/employees/{id}")
     EntityModel<User> one(@PathVariable Long id) {
         User user = repo.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
-
         return assembler.toModel(user);
     }
 
     // POST Mappings
     @PostMapping("/employees")
-    User newUser(@RequestBody User newUser) {
-        return repo.save(newUser);
+    ResponseEntity<?> newUser(@RequestBody User newUser) {
+        EntityModel<User> entityModel = assembler.toModel(repo.save(newUser));
+        return ResponseEntity
+                .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+                .body(entityModel);
     }
 
     // PUT Mappings
     @PutMapping("/employees/{id}")
-    User replaceEmployee(@RequestBody User newUser, @PathVariable Long id) {
-
-        return repo.findById(id)
-                .map(employee -> {
-                    employee.setName(newUser.getName());
-                    employee.setRole(newUser.getRole());
-                    return repo.save(employee);
+    ResponseEntity<?> replaceEmployee(@RequestBody User newUser, @PathVariable Long id) {
+        User updatedUser = repo.findById(id)
+                .map(user -> {
+                    user.setName(newUser.getName());
+                    user.setSurname(newUser.getSurname());
+                    user.setRole(newUser.getRole());
+                    return repo.save(user);
                 })
                 .orElseGet(() -> {
-                    newUser.setId(id);
-                    return repo.save(newUser);
+                   newUser.setId(id);
+                   return repo.save(newUser);
                 });
+
+        EntityModel<User> entityModel = assembler.toModel(updatedUser);
+        return ResponseEntity
+                .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+                .body(entityModel);
     }
 
     // DELETE Mappings
     @DeleteMapping("/employees/{id}")
-    void deleteEmployee(@PathVariable Long id) {
+    ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
         repo.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
