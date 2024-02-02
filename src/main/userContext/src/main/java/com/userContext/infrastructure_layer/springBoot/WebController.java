@@ -2,9 +2,15 @@ package com.userContext.infrastructure_layer.springBoot;
 
 import com.userContext.business_logic_layer.User;
 import com.userContext.infrastructure_layer.springBoot.exceptions.UserNotFoundException;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 public class WebController {
@@ -17,14 +23,25 @@ public class WebController {
 
     // GET Mappings
     @GetMapping("/employees")
-    List<User> all() {
-        return repo.findAll();
+    CollectionModel<EntityModel<User>> all() {
+        List<EntityModel<User>> user = repo.findAll().stream()
+                .map(userList -> EntityModel.of(userList,
+                        linkTo(methodOn(WebController.class).one(userList.getId())).withSelfRel(),
+                        linkTo(methodOn(WebController.class).all()).withRel("employees")
+                        ))
+                .collect(Collectors.toList());
+
+        return CollectionModel.of(user, linkTo(methodOn(WebController.class).all()).withSelfRel());
     }
     @GetMapping("/employees/{id}")
-    User one(@PathVariable Long id) {
-
-        return repo.findById(id)
+    EntityModel<User> one(@PathVariable Long id) {
+        User user = repo.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
+
+        return EntityModel.of(user,
+                linkTo(methodOn(WebController.class).one(id)).withSelfRel(),
+                linkTo(methodOn(WebController.class).all()).withRel("employees")
+                );
     }
 
     // POST Mappings
