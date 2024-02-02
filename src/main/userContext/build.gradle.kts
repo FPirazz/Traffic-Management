@@ -1,6 +1,6 @@
 plugins {
     java
-    id("org.springframework.boot") version "3.2.2" apply false
+    id("org.springframework.boot") version "3.2.2"
     id("io.spring.dependency-management") version "1.1.4"
 }
 
@@ -11,7 +11,7 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation("com.h2database:h2")
+    runtimeOnly("com.h2database:h2")
     implementation("jakarta.persistence:jakarta.persistence-api")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-hateoas")
