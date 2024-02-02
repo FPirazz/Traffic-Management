@@ -1,20 +1,23 @@
 package com.userContext.business_logic_layer;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Table(name = "USER")
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ")
+    @SequenceGenerator(name = "USER_SEQ", sequenceName = "USER_SEQ", allocationSize = 1)
     private Long id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String surname;
+    @Column(nullable = false)
     private String role;
     public User(final String name, final String surname, final String role) {
         this.name = name;
@@ -73,4 +76,6 @@ public class User implements Serializable {
     public int hashCode() {
         return Objects.hash(id, name, surname, role);
     }
+
+
 }
