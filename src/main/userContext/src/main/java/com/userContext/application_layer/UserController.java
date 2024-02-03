@@ -1,7 +1,8 @@
-package com.userContext.infrastructure_layer.springBoot;
+package com.userContext.application_layer;
 
 import com.userContext.business_logic_layer.User;
-import com.userContext.infrastructure_layer.springBoot.exceptions.UserNotFoundException;
+import com.userContext.business_logic_layer.UserRepository;
+import com.userContext.application_layer.exceptions.UserNotFoundException;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -15,25 +16,25 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-public class WebController {
+public class UserController {
 
     private final UserRepository repo;
     private final UserModelAssembler assembler;
 
-    public WebController(final UserRepository repo, final UserModelAssembler assembler) {
+    public UserController(final UserRepository repo, final UserModelAssembler assembler) {
         this.repo = repo;
         this.assembler = assembler;
     }
 
     // GET Mappings
-    @GetMapping("/employees")
+    @GetMapping("/users")
     CollectionModel<EntityModel<User>> all() {
         List<EntityModel<User>> user = repo.findAll().stream()
                 .map(assembler::toModel)
                 .collect(Collectors.toList());
-        return CollectionModel.of(user, linkTo(methodOn(WebController.class).all()).withSelfRel());
+        return CollectionModel.of(user, linkTo(methodOn(UserController.class).all()).withSelfRel());
     }
-    @GetMapping("/employees/{id}")
+    @GetMapping("/users/{id}")
     EntityModel<User> one(@PathVariable Long id) {
         User user = repo.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
@@ -41,7 +42,7 @@ public class WebController {
     }
 
     // POST Mappings
-    @PostMapping("/employees")
+    @PostMapping("/users")
     ResponseEntity<?> newUser(@RequestBody User newUser) {
         EntityModel<User> entityModel = assembler.toModel(repo.save(newUser));
         return ResponseEntity
@@ -50,8 +51,8 @@ public class WebController {
     }
 
     // PUT Mappings
-    @PutMapping("/employees/{id}")
-    ResponseEntity<?> replaceEmployee(@RequestBody User newUser, @PathVariable Long id) {
+    @PutMapping("/users/{id}")
+    ResponseEntity<?> replaceUser(@RequestBody User newUser, @PathVariable Long id) {
         User updatedUser = repo.findById(id)
                 .map(user -> {
                     user.setName(newUser.getName());
@@ -71,8 +72,8 @@ public class WebController {
     }
 
     // DELETE Mappings
-    @DeleteMapping("/employees/{id}")
-    ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
+    @DeleteMapping("/users/{id}")
+    ResponseEntity<?> deleteUser(@PathVariable Long id) {
         repo.deleteById(id);
         return ResponseEntity.noContent().build();
     }

@@ -25,18 +25,7 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public User() {
-
-    }
-
-    public void saveUser() {
-        try {
-            DomainModelImpl.getDataSourcePort().saveUser();
-        } catch (Exception ex){
-            ex.printStackTrace();
-        }
-
-    }
+    public User() {}
 
     public Long getId() {
         return id;
