@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.*;
 @EnableJpaRepositories(basePackages="com.userContext")
 @EnableTransactionManagement
 @EntityScan(basePackages="com.userContext")
+@ComponentScan(basePackages = {"com.userContext"} )
 public class UserApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserApplication.class, args);

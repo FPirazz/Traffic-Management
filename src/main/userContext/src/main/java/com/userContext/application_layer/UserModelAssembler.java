@@ -1,4 +1,4 @@
-package com.userContext.infrastructure_layer.springBoot;
+package com.userContext.application_layer;
 
 import com.userContext.business_logic_layer.User;
 import org.springframework.hateoas.EntityModel;
@@ -14,8 +14,8 @@ public class UserModelAssembler implements RepresentationModelAssembler<User, En
     @Override
     public EntityModel<User> toModel(User entity) {
         return EntityModel.of(entity,
-                linkTo(methodOn(WebController.class).one(entity.getId())).withSelfRel(),
-                linkTo(methodOn(WebController.class).all()).withRel("employees")
+                linkTo(methodOn(UserController.class).one(entity.getId())).withSelfRel(),
+                linkTo(methodOn(UserController.class).all()).withRel("users")
         );
     }
 }
