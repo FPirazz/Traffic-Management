@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.Java
+
 apply(".jcm-deps.gradle")
 
 plugins {
@@ -8,7 +10,6 @@ plugins {
 
 application {
     mainClass = "jacamo.infra.JaCaMoLauncher"
-//    applicationDefaultJvmArgs = listOf("intersection.jcm")
 }
 
 repositories {
@@ -25,13 +26,17 @@ dependencies {
 }
 
 
-task("runAgents") {
+task<JavaExec>("runAgents") {
     group = "JaCaMo"
     description = "Runs the JaCaMo application"
+    mainClass = "jacamo.infra.JaCaMoLauncher"
+    args("intersection.jcm")
+
     doFirst {
         mkdir("./log")
     }
-
-
     dependsOn("classes")
+    classpath(configurations.runtimeClasspath)
 }
+
+
