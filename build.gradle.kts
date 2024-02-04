@@ -9,7 +9,10 @@ repositories {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(19)
+    }
+    sourceCompatibility = JavaVersion.VERSION_19
 }
 
 allprojects {
