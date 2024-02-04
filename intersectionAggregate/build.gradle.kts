@@ -8,6 +8,18 @@ plugins {
     application
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs("src/agt", "src/env", "src/org")
+        }
+        resources {
+            srcDirs("src/resources")
+        }
+    }
+
+}
+
 application {
     mainClass = "jacamo.infra.JaCaMoLauncher"
 }
@@ -22,6 +34,7 @@ repositories {
 
 dependencies {
     implementation("org.jacamo:jacamo:1.2")
+    implementation("org.jacamo:cartago:3.1")
     implementation("com.fasterxml.jackson.core:jackson-core:2.9.8")
 }
 
