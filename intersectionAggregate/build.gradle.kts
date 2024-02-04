@@ -1,3 +1,5 @@
+apply(".jcm-deps.gradle")
+
 plugins {
     id("java")
     id("maven-publish")
@@ -6,7 +8,7 @@ plugins {
 
 application {
     mainClass = "jacamo.infra.JaCaMoLauncher"
-    applicationDefaultJvmArgs = listOf("") //TODO INSERT .JCM FILE
+//    applicationDefaultJvmArgs = listOf("intersection.jcm")
 }
 
 repositories {
@@ -23,12 +25,13 @@ dependencies {
 }
 
 
-tasks.register("runAgents") {
+task("runAgents") {
     group = "JaCaMo"
     description = "Runs the JaCaMo application"
     doFirst {
         mkdir("./log")
     }
+
 
     dependsOn("classes")
 }

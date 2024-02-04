@@ -1,0 +1,20 @@
+mas intersection {
+
+    agent tr1 : test.asl {
+        beliefs: message("Test1")
+    }
+
+    agent tr2 : test.asl {
+        beliefs: message("Test2")
+    }
+
+    agent tr3 : test.asl {
+        beliefs: message("Test3")
+    }
+
+    agent tr4 : test.asl {
+        beliefs: message("Test4")
+    }
+
+
+}
