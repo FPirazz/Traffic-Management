@@ -7,5 +7,4 @@ mas intersection {
     agent tr3 : trafficLight3.asl
 
     agent tr4 : trafficLight4.asl
-
 }
