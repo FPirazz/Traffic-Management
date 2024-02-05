@@ -13,10 +13,11 @@ tr_is_green(S)
 
 +!initTrafficLight
     <- println("Setting up Traffic Light...");
-       makeArtifact("traffic_light_2", "acme.TrafficLight", ["2"], Tr);
-       focus(Tr);
-       println("Traffic Light Ready!");
-       !trState2("red").
+       makeArtifact("traffic_light_2", "acme.TrafficLight", ["2"], Tr2);
+       focus(Tr2);
+       .wait(500);
+       sendId;
+       println("Traffic Light Ready!").
 
 
 
@@ -33,8 +34,7 @@ tr_is_green(S)
 
 +!trState2(S): tr_is_yellow(S)
     <- //println("--- Traffic Light is Yellow ---");
-       redState;
-       !trState2(S1).
+       redState.
 
 
 
