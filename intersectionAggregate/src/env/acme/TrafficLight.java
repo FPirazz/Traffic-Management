@@ -9,10 +9,10 @@ public class TrafficLight extends Artifact {
     private String id;
     private TrafficLightState state;
 
-    void init() {
-        defineObsProperty("trState", "red");
+    void init(final String id) {
+        defineObsProperty("trState" + id, "red");
         this.state = TrafficLightState.RED;
-//        this.id = id;
+        this.id = id;
 //        log(id + " - Traffic Light RED");
         log("Traffic Light is ready");
     }
@@ -20,7 +20,7 @@ public class TrafficLight extends Artifact {
     @OPERATION
     public void redState() {
         this.state = TrafficLightState.RED;
-        getObsProperty("trState").updateValue("red");
+        getObsProperty("trState" + id).updateValue("red");
         log("Traffic Light is: " + this.state);
         this.await_time(5_000);
 
@@ -35,7 +35,7 @@ public class TrafficLight extends Artifact {
     @OPERATION
     public void yellowState() {
         this.state = TrafficLightState.YELLOW;
-        getObsProperty("trState").updateValue("yellow");
+        getObsProperty("trState" + id).updateValue("yellow");
         log("Traffic Light is: " + this.state);
         this.await_time(5_000);
 
@@ -50,7 +50,7 @@ public class TrafficLight extends Artifact {
     @OPERATION
     public void greenState() {
         this.state = TrafficLightState.GREEN;
-        getObsProperty("trState").updateValue("green");
+        getObsProperty("trState" + id).updateValue("green");
         log("Traffic Light is: " + this.state);
         this.await_time(5_000);
 
