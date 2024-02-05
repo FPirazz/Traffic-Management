@@ -1,8 +1,6 @@
 package acme;
 
-import cartago.Artifact;
-import cartago.INTERNAL_OPERATION;
-import cartago.OPERATION;
+import cartago.*;
 
 public class TrafficLight extends Artifact {
 
@@ -60,6 +58,17 @@ public class TrafficLight extends Artifact {
 //        } catch (InterruptedException e) {
 //            throw new RuntimeException(e);
 //        }
+    }
+
+    @OPERATION
+    public void sendId() {
+        try {
+            ArtifactId intersection = this.lookupArtifact("intersection");
+            execLinkedOp(intersection, "storeTrafficLightId", this.id);
+        } catch (OperationException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 }
