@@ -11,7 +11,7 @@ plugins {
 sourceSets {
     main {
         java {
-            srcDirs("src/agt", "src/env", "src/org")
+            srcDirs("src/env", "src/agt", "src/org")
         }
         resources {
             srcDirs("src/resources")
@@ -20,15 +20,12 @@ sourceSets {
 
 }
 
-application {
-    mainClass = "jacamo.infra.JaCaMoLauncher"
-}
-
 repositories {
     maven { url = uri("https://raw.githubusercontent.com/jacamo-lang/mvn-repo/master") }
     maven { url = uri( "https://repo.gradle.org/gradle/libs-releases") }
     maven { url = uri( "https://jitpack.io") }
-    maven { url = uri("https://raw.githubusercontent.com/jacamo-lang/mvn-repo/master") }
+
+    flatDir { dirs("lib") }
 
     mavenCentral()
 }
@@ -40,18 +37,16 @@ dependencies {
     implementation("org.jacamo:jacamo-rest:0.7")
 }
 
-
 task<JavaExec>("runAgents") {
     group = "JaCaMo"
     description = "Runs the JaCaMo application"
+    dependsOn("classes")
     mainClass = "jacamo.infra.JaCaMoLauncher"
     args("intersection.jcm")
 
     doFirst {
         mkdir("./log")
     }
-    dependsOn("classes")
-    classpath(configurations.runtimeClasspath)
+
+    classpath(sourceSets.main.get().runtimeClasspath)
 }
-
-
