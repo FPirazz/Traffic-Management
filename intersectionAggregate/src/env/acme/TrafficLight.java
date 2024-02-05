@@ -9,6 +9,7 @@ public class TrafficLight extends Artifact {
 
     void init(final String id) {
         defineObsProperty("trState" + id, "red");
+        defineObsProperty("target_state" + id, "red");
         this.state = TrafficLightState.RED;
         this.id = id;
 //        log(id + " - Traffic Light RED");
@@ -61,6 +62,12 @@ public class TrafficLight extends Artifact {
     }
 
     @OPERATION
+    public void preGreenState() {
+        this.state = TrafficLightState.PREGREEN;
+        getObsProperty("trState" + id).updateValue("preGreen");
+    }
+
+    @OPERATION
     public void sendId() {
         try {
             ArtifactId intersection = this.lookupArtifact("intersection");
@@ -68,7 +75,6 @@ public class TrafficLight extends Artifact {
         } catch (OperationException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 }
