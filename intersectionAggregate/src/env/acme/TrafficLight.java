@@ -22,6 +22,7 @@ public class TrafficLight extends Artifact {
         getObsProperty("trState" + id).updateValue("red");
         log("Traffic Light is: " + this.state);
         this.await_time(5_000);
+        this.sendRedIntersection();
 
         //TODO Send to intersection state
 //        try {
@@ -72,6 +73,16 @@ public class TrafficLight extends Artifact {
         try {
             ArtifactId intersection = this.lookupArtifact("intersection");
             execLinkedOp(intersection, "storeTrafficLightId", this.id);
+        } catch (OperationException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @INTERNAL_OPERATION
+    private void sendRedIntersection() {
+        try {
+            ArtifactId intersection = this.lookupArtifact("intersection");
+            execLinkedOp(intersection, "trIsDone", this.id);
         } catch (OperationException e) {
             throw new RuntimeException(e);
         }
