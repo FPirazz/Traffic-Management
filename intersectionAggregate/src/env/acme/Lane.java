@@ -4,15 +4,16 @@ import moise.os.ss.Link;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Lane {
 
-    private List<Vehicle> vehiclesOnLane;
+    private Queue<Vehicle> vehiclesOnLane;
 
     public Lane() {
         this.vehiclesOnLane = new LinkedList<>();
     }
-    public List<Vehicle> getVehiclesOnLane() {
+    public Queue<Vehicle> getVehiclesOnLane() {
         return vehiclesOnLane;
     }
 }

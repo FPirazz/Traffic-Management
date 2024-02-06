@@ -2,6 +2,7 @@ package acme;
 
 import cartago.*;
 
+import java.util.Queue;
 import java.util.Random;
 
 public class TrafficLight extends Artifact {
@@ -38,13 +39,6 @@ public class TrafficLight extends Artifact {
         log("Traffic Light is: " + this.state);
         this.waitAndSpawnVehicles(redWaitTime, 500, 50);
         this.sendRedIntersection();
-
-        //TODO Send to intersection state
-//        try {
-//            wait(5_000); // 5 seconds are just for testing, Expected wait time is around 60 seconds
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
     }
 
     @OPERATION
@@ -52,14 +46,7 @@ public class TrafficLight extends Artifact {
         this.state = TrafficLightState.YELLOW;
         getObsProperty("trState" + id).updateValue("yellow");
         log("Traffic Light is: " + this.state);
-        this.await_time(yellowWaitTime);
-
-        //TODO Send to intersection state
-//        try {
-//            wait(5_000); // 5 seconds are just for testing, Expected wait time is around 7 seconds
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
+        this.waitAndSpawnVehicles(yellowWaitTime, 500, 20);
     }
 
     @OPERATION
@@ -67,14 +54,7 @@ public class TrafficLight extends Artifact {
         this.state = TrafficLightState.GREEN;
         getObsProperty("trState" + id).updateValue("green");
         log("Traffic Light is: " + this.state);
-        this.await_time(greenWaitTime);
-
-        //TODO Send to intersection state
-//        try {
-//            wait(5_000); // 5 seconds are just for testing, Expected wait time is around 30 seconds
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
+        this.waitAndRemoveVehicles(greenWaitTime, 500);
     }
 
     @OPERATION
@@ -105,7 +85,7 @@ public class TrafficLight extends Artifact {
 
     private void waitAndSpawnVehicles(final long timeToWaitMillis, final long checksPerMillis, int chanceToSpawnVehicles) {
         int generatedNumber;
-        Random rnd = new Random();
+        Random rnd = new Random(System.currentTimeMillis());
         for(long i = checksPerMillis; i < timeToWaitMillis; i += checksPerMillis) {
             this.await_time(checksPerMillis);
             generatedNumber = rnd.nextInt(1, 100);
@@ -115,6 +95,22 @@ public class TrafficLight extends Artifact {
                 normalCarsProp.updateValue(normalCarsProp.intValue() + 1);
 
                 getObsProperty("totalVehicles").updateValue(getObsProperty("normalVehicles").intValue() + getObsProperty("emergencyVehicles").intValue());
+            }
+        }
+    }
+
+    private void waitAndRemoveVehicles(final long timeToWaitMillis, final long checksPerMillis) {
+        Vehicle tmpVehicle;
+        Queue<Vehicle> lane = this.lane.getVehiclesOnLane();
+        for(long i = checksPerMillis; i < timeToWaitMillis; i += checksPerMillis) {
+            this.await_time(checksPerMillis);
+            if(!lane.isEmpty()){
+                tmpVehicle = lane.poll();
+                if(tmpVehicle.getType().equals(VehicleType.Normal)){
+                    ObsProperty normalCarsProp = getObsProperty("normalVehicles");
+                    normalCarsProp.updateValue(normalCarsProp.intValue() - 1);
+                    getObsProperty("totalVehicles").updateValue(getObsProperty("totalVehicles").intValue() - 1);
+                }
             }
         }
     }
