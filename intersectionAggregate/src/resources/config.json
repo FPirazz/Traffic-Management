@@ -1,0 +1,19 @@
+{
+  "configs": {
+    "default": {
+      "states": {
+        "red": 60,
+        "yellow": 7,
+        "green": 30
+      }
+    },
+    "fast": {
+      "numCars": 25,
+      "states": {
+        "red": 20,
+        "yellow": 7,
+        "green": 40
+      }
+    }
+  }
+}

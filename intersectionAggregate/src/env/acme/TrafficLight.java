@@ -1,9 +1,21 @@
 package acme;
 
 import cartago.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
+import org.apache.commons.io.IOUtils;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.Random;
+
+import org.json.*;
 
 public class TrafficLight extends Artifact {
 
@@ -22,6 +34,20 @@ public class TrafficLight extends Artifact {
         redWaitTime = 5_000;
         yellowWaitTime = 5_000;
         greenWaitTime = 5_000;
+
+        File f = new File(getClass().getClassLoader().getResource("config.json").getPath());
+
+        Gson g = new Gson();
+
+        if(f.exists()) {
+            JsonObject jsonObject = null;
+            try {
+                jsonObject = new JsonParser().parse(Files.readString(Path.of(f.getPath()))).getAsJsonObject();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println(jsonObject.get("configs"));
+        }
 
         defineObsProperty("trState" + id, "red");
         defineObsProperty("normalVehicles", 0);

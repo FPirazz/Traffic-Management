@@ -27,8 +27,10 @@ allprojects {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.9.1"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
+    implementation("org.json:json:20231013")
+    implementation(platform("org.junit:junit-bom:5.9.1"))
+    implementation("org.junit.jupiter:junit-jupiter:5.9.2")
+    implementation("com.google.code.gson:gson:2.10.1")
 }
 
 tasks.test {
