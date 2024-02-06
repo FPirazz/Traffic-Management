@@ -29,45 +29,67 @@ public class Intersection extends Artifact {
 
     @OPERATION
     private void changeAllPace(final String pace, final String id) {
-
-        String pace1_3;
-        String pace2_4;
-
         log("TL " + id + " - With pace " + pace);
 
-        if(pace.equals("fast")) {
-            if(Integer.parseInt(id) % 2 == 1) {
-                pace1_3 = "fast";
-                pace2_4 = "slow";
-            } else {
-                pace1_3 = "slow";
-                pace2_4 = "fast";
-            }
+        if(pace.equals("emergencyOn")){
+            List<String> tmp = new ArrayList<>();
+            tmp.add("1"); tmp.add("2"); tmp.add("3"); tmp.add("4");
+            tmp.remove(id);
+
+            log("Changing pace");
+            log("Current pace is");
+            log("TL " + id + " is emergencyOn");
+            log("Others are on emergencyOff");
+
+            tmp.forEach(tmpId -> {
+                try {
+                    ArtifactId trafficLight = this.lookupArtifact("traffic_light_" + tmpId);
+                    execLinkedOp(trafficLight, "changePace", "emergencyOff");
+                } catch (OperationException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         } else {
-            pace1_3 = "test";
-            pace2_4 = "test";
-        }
 
-        log("Changing pace");
-        log("Current pace is");
-        log("TL1-3 " + pace1_3);
-        log("TL2-4 " + pace2_4);
+            String pace1_3;
+            String pace2_4;
 
-        ArtifactId trafficLight;
-        try {
-            trafficLight = this.lookupArtifact("traffic_light_1");
-            execLinkedOp(trafficLight, "changePace", pace1_3);
 
-            trafficLight = this.lookupArtifact("traffic_light_2");
-            execLinkedOp(trafficLight, "changePace", pace2_4);
 
-            trafficLight = this.lookupArtifact("traffic_light_3");
-            execLinkedOp(trafficLight, "changePace", pace1_3);
+            if (pace.equals("fast")) {
+                if (Integer.parseInt(id) % 2 == 1) {
+                    pace1_3 = "fast";
+                    pace2_4 = "slow";
+                } else {
+                    pace1_3 = "slow";
+                    pace2_4 = "fast";
+                }
+            } else {
+                pace1_3 = "test";
+                pace2_4 = "test";
+            }
 
-            trafficLight = this.lookupArtifact("traffic_light_4");
-            execLinkedOp(trafficLight, "changePace", pace2_4);
-        } catch (OperationException e) {
-            throw new RuntimeException(e);
+            log("Changing pace");
+            log("Current pace is");
+            log("TL1-3 " + pace1_3);
+            log("TL2-4 " + pace2_4);
+
+            ArtifactId trafficLight;
+            try {
+                trafficLight = this.lookupArtifact("traffic_light_1");
+                execLinkedOp(trafficLight, "changePace", pace1_3);
+
+                trafficLight = this.lookupArtifact("traffic_light_2");
+                execLinkedOp(trafficLight, "changePace", pace2_4);
+
+                trafficLight = this.lookupArtifact("traffic_light_3");
+                execLinkedOp(trafficLight, "changePace", pace1_3);
+
+                trafficLight = this.lookupArtifact("traffic_light_4");
+                execLinkedOp(trafficLight, "changePace", pace2_4);
+            } catch (OperationException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

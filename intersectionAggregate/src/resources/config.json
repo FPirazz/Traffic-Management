@@ -15,6 +15,20 @@
         "green": 40
       }
     },
+    "emergencyOn": {
+      "states": {
+        "red": 130,
+        "yellow": 7,
+        "green": 120
+      }
+    },
+    "emergencyOff": {
+      "states": {
+        "red": 130,
+        "yellow": 5,
+        "green": 5
+      }
+    },
     "test": {
       "states": {
         "red": 5,

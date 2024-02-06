@@ -64,17 +64,17 @@ public class TrafficLight extends Artifact {
         this.state = TrafficLightState.RED;
         getObsProperty("trState" + id).updateValue("red");
         log("Traffic Light is: " + this.state);
-        if(getObsProperty("totalVehicles").intValue() > numCarsFast && flowOfTraffic.equals("test")) {
+        if(getObsProperty("totalVehicles").intValue() > numCarsFast && flowOfTraffic.equals("test") && !flowOfTraffic.equals("emergencyOff")) {
             this.flowOfTraffic = "fast";
             this.sendChangedPace();
             this.setWaitingTimes(flowOfTraffic);
-        } else if (getObsProperty("totalVehicles").intValue() < numCarsFast && flowOfTraffic.equals("fast")) {
+        } else if (getObsProperty("totalVehicles").intValue() < numCarsFast && flowOfTraffic.equals("fast") && !flowOfTraffic.equals("emergencyOff")) {
             this.flowOfTraffic = "test";
             this.sendChangedPace();
             this.setWaitingTimes(flowOfTraffic);
         }
         this.sendRedIntersection();
-        this.waitAndSpawnVehicles(redWaitTime, 500, 50);
+        this.waitAndSpawnVehicles(redWaitTime, 500, 50, 5);
     }
 
     @OPERATION
@@ -82,7 +82,7 @@ public class TrafficLight extends Artifact {
         this.state = TrafficLightState.YELLOW;
         getObsProperty("trState" + id).updateValue("yellow");
         log("Traffic Light is: " + this.state);
-        this.waitAndSpawnVehicles(yellowWaitTime, 500, 20);
+        this.waitAndSpawnVehicles(yellowWaitTime, 500, 20, 5);
     }
 
     @OPERATION
@@ -154,16 +154,27 @@ public class TrafficLight extends Artifact {
         }
     }
 
-    private void waitAndSpawnVehicles(final long timeToWaitMillis, final long checksPerMillis, int chanceToSpawnVehicles) {
+    private void waitAndSpawnVehicles(final long timeToWaitMillis, final long checksPerMillis, int chanceToSpawnNormalVehicles, int chanceToSpawnEmergencyVehicles) {
         int generatedNumber;
         Random rnd = new Random(System.currentTimeMillis());
         for(long i = checksPerMillis; i < timeToWaitMillis; i += checksPerMillis) {
             this.await_time(checksPerMillis);
             generatedNumber = rnd.nextInt(1, 100);
-            if(generatedNumber < chanceToSpawnVehicles) {
+
+            if(this.lane.getVehiclesOnLane().stream().anyMatch(vehicle -> vehicle.getType().equals(VehicleType.Emergency))) {
+                this.flowOfTraffic = "emergencyOn";
+                this.sendChangedPace();
+                break;
+            } else if(generatedNumber < chanceToSpawnNormalVehicles) {
                 this.lane.getVehiclesOnLane().add(new Vehicle(VehicleType.Normal));
                 ObsProperty normalCarsProp = getObsProperty("normalVehicles");
                 normalCarsProp.updateValue(normalCarsProp.intValue() + 1);
+
+                getObsProperty("totalVehicles").updateValue(getObsProperty("normalVehicles").intValue() + getObsProperty("emergencyVehicles").intValue());
+            } else if(generatedNumber < chanceToSpawnEmergencyVehicles) {
+                this.lane.getVehiclesOnLane().add(new Vehicle(VehicleType.Emergency));
+                ObsProperty emergencyCarsProp = getObsProperty("emergencyVehicles");
+                emergencyCarsProp.updateValue(emergencyCarsProp.intValue() + 1);
 
                 getObsProperty("totalVehicles").updateValue(getObsProperty("normalVehicles").intValue() + getObsProperty("emergencyVehicles").intValue());
             }
@@ -181,20 +192,26 @@ public class TrafficLight extends Artifact {
                     ObsProperty normalCarsProp = getObsProperty("normalVehicles");
                     normalCarsProp.updateValue(normalCarsProp.intValue() - 1);
                     getObsProperty("totalVehicles").updateValue(getObsProperty("totalVehicles").intValue() - 1);
+                } else {
+                    ObsProperty emergencyCarsProp = getObsProperty("emergencyVehicles");
+                    emergencyCarsProp.updateValue(emergencyCarsProp.intValue() - 1);
+                    getObsProperty("totalVehicles").updateValue(getObsProperty("totalVehicles").intValue() - 1);
+                    this.flowOfTraffic = "test";
+                    this.sendChangedPace();
+                    break;
                 }
             }
         }
     }
 
     private void setWaitingTimes(final String type) {
-        JsonObject tmp;
-        if(type.equals("default")) {
-            tmp = this.configs.get("default").getAsJsonObject().get("states").getAsJsonObject();
-        } else if(type.equals("fast")) {
-            tmp = this.configs.get("fast").getAsJsonObject().get("states").getAsJsonObject();
-        } else {
-            tmp = this.configs.get("test").getAsJsonObject().get("states").getAsJsonObject();
-        }
+        JsonObject tmp = switch (type) {
+            case "default" -> this.configs.get("default").getAsJsonObject().get("states").getAsJsonObject();
+            case "fast" -> this.configs.get("fast").getAsJsonObject().get("states").getAsJsonObject();
+            case "emergencyOn" -> this.configs.get("emergencyOn").getAsJsonObject().get("states").getAsJsonObject();
+            case "emergencyOff" -> this.configs.get("emergencyOff").getAsJsonObject().get("states").getAsJsonObject();
+            default -> this.configs.get("test").getAsJsonObject().get("states").getAsJsonObject();
+        };
         this.redWaitTime = tmp.get("red").getAsLong() * 1000;
         this.yellowWaitTime = tmp.get("yellow").getAsLong() * 1000;
         this.greenWaitTime = tmp.get("green").getAsLong() * 1000;
