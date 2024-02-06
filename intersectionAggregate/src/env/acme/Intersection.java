@@ -3,20 +3,19 @@ package acme;
 import cartago.*;
 import com.kitfox.svg.A;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Intersection extends Artifact {
 
     private List<String> ids;
     private List<String> tempIds;
+    private Map<String, Lane> roads;
 
 
     void init() {
         this.ids = new ArrayList<>();
         this.tempIds = new ArrayList<>();
+        this.roads = new HashMap<>();
         log("Intersection is ready");
     }
 
@@ -26,6 +25,7 @@ public class Intersection extends Artifact {
         log("Added TR Id: " + id);
         if(ids.size() == 4) {
             Collections.sort(ids);
+            ids.forEach(insideId -> roads.put(insideId, new Lane()));
             this.startTrafficLight(ids);
         }
     }
@@ -34,11 +34,6 @@ public class Intersection extends Artifact {
     public void trIsDone(final String id) {
         this.tempIds.add(id);
         this.ids.remove(id);
-
-//        log("ID " + id + " arrived");
-//        log(String.valueOf(tempIds.size()));
-//        log(String.valueOf(ids.size()));
-
         if(tempIds.size() == 2 && ids.size() == 2) {
             Collections.sort(tempIds);
             try {
