@@ -35,6 +35,7 @@ dependencies {
     implementation("org.jacamo:cartago:3.1")
     implementation("com.fasterxml.jackson.core:jackson-core:2.9.8")
     implementation("org.jacamo:jacamo-rest:0.7")
+    implementation("org.json:json:20231013")
 }
 
 task<JavaExec>("runAgents") {
