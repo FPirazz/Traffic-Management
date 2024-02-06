@@ -28,6 +28,50 @@ public class Intersection extends Artifact {
     }
 
     @OPERATION
+    private void changeAllPace(final String pace, final String id) {
+
+        String pace1_3;
+        String pace2_4;
+
+        log("TL " + id + " - With pace " + pace);
+
+        if(pace.equals("fast")) {
+            if(Integer.parseInt(id) % 2 == 1) {
+                pace1_3 = "fast";
+                pace2_4 = "slow";
+            } else {
+                pace1_3 = "slow";
+                pace2_4 = "fast";
+            }
+        } else {
+            pace1_3 = "test";
+            pace2_4 = "test";
+        }
+
+        log("Changing pace");
+        log("Current pace is");
+        log("TL1-3 " + pace1_3);
+        log("TL2-4 " + pace2_4);
+
+        ArtifactId trafficLight;
+        try {
+            trafficLight = this.lookupArtifact("traffic_light_1");
+            execLinkedOp(trafficLight, "changePace", pace1_3);
+
+            trafficLight = this.lookupArtifact("traffic_light_2");
+            execLinkedOp(trafficLight, "changePace", pace2_4);
+
+            trafficLight = this.lookupArtifact("traffic_light_3");
+            execLinkedOp(trafficLight, "changePace", pace1_3);
+
+            trafficLight = this.lookupArtifact("traffic_light_4");
+            execLinkedOp(trafficLight, "changePace", pace2_4);
+        } catch (OperationException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @OPERATION
     public void trIsDone(final String id) {
         this.tempIds.add(id);
         this.ids.remove(id);
