@@ -9,13 +9,11 @@ public class Intersection extends Artifact {
 
     private List<String> ids;
     private List<String> tempIds;
-    private Map<String, Lane> roads;
-
 
     void init() {
         this.ids = new ArrayList<>();
         this.tempIds = new ArrayList<>();
-        this.roads = new HashMap<>();
+
         log("Intersection is ready");
     }
 
@@ -25,7 +23,6 @@ public class Intersection extends Artifact {
         log("Added TR Id: " + id);
         if(ids.size() == 4) {
             Collections.sort(ids);
-            ids.forEach(insideId -> roads.put(insideId, new Lane()));
             this.startTrafficLight(ids);
         }
     }
