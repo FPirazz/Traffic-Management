@@ -11,6 +11,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Objects;
 import java.util.Queue;
 import java.util.Random;
@@ -25,29 +26,29 @@ public class TrafficLight extends Artifact {
     private long redWaitTime;
     private long yellowWaitTime;
     private long greenWaitTime;
-
+    private String flowOfTraffic;
+    private int numCarsFast;
+    private JsonObject configs;
 
     void init(final String id) {
         this.state = TrafficLightState.RED;
         this.id = id;
         this.lane = new Lane();
-        redWaitTime = 5_000;
-        yellowWaitTime = 5_000;
-        greenWaitTime = 5_000;
+        this.flowOfTraffic = "test";
 
         File f = new File(getClass().getClassLoader().getResource("config.json").getPath());
-
         Gson g = new Gson();
-
         if(f.exists()) {
             JsonObject jsonObject = null;
             try {
                 jsonObject = new JsonParser().parse(Files.readString(Path.of(f.getPath()))).getAsJsonObject();
+                this.configs = jsonObject.get("configs").getAsJsonObject();
+                this.numCarsFast = this.configs.get("fast").getAsJsonObject().get("numCars").getAsInt();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println(jsonObject.get("configs"));
         }
+        setWaitingTimes(flowOfTraffic);
 
         defineObsProperty("trState" + id, "red");
         defineObsProperty("normalVehicles", 0);
@@ -63,8 +64,17 @@ public class TrafficLight extends Artifact {
         this.state = TrafficLightState.RED;
         getObsProperty("trState" + id).updateValue("red");
         log("Traffic Light is: " + this.state);
-        this.waitAndSpawnVehicles(redWaitTime, 500, 50);
+        if(getObsProperty("totalVehicles").intValue() > numCarsFast && flowOfTraffic.equals("test")) {
+            this.flowOfTraffic = "fast";
+            this.sendChangedPace();
+            this.setWaitingTimes(flowOfTraffic);
+        } else if (getObsProperty("totalVehicles").intValue() < numCarsFast && flowOfTraffic.equals("fast")) {
+            this.flowOfTraffic = "test";
+            this.sendChangedPace();
+            this.setWaitingTimes(flowOfTraffic);
+        }
         this.sendRedIntersection();
+        this.waitAndSpawnVehicles(redWaitTime, 50, 50);
     }
 
     @OPERATION
@@ -99,6 +109,23 @@ public class TrafficLight extends Artifact {
         }
     }
 
+    @OPERATION
+    private void changePace(final String pace) {
+        this.flowOfTraffic = pace;
+        this.setWaitingTimes(flowOfTraffic);
+    }
+
+    @INTERNAL_OPERATION
+    private void sendChangedPace() {
+        try {
+            ArtifactId intersection = this.lookupArtifact("intersection");
+            execLinkedOp(intersection, "changeAllPace", this.flowOfTraffic, this.id);
+        } catch (OperationException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     @INTERNAL_OPERATION
     private void sendRedIntersection() {
         try {
@@ -132,7 +159,7 @@ public class TrafficLight extends Artifact {
             this.await_time(checksPerMillis);
             if(!lane.isEmpty()){
                 tmpVehicle = lane.poll();
-                if(tmpVehicle.getType().equals(VehicleType.Normal)){
+                if(tmpVehicle.getType().equals(VehicleType.Normal)) {
                     ObsProperty normalCarsProp = getObsProperty("normalVehicles");
                     normalCarsProp.updateValue(normalCarsProp.intValue() - 1);
                     getObsProperty("totalVehicles").updateValue(getObsProperty("totalVehicles").intValue() - 1);
@@ -141,4 +168,17 @@ public class TrafficLight extends Artifact {
         }
     }
 
+    private void setWaitingTimes(final String type) {
+        JsonObject tmp;
+        if(type.equals("default")) {
+            tmp = this.configs.get("default").getAsJsonObject().get("states").getAsJsonObject();
+        } else if(type.equals("fast")) {
+            tmp = this.configs.get("fast").getAsJsonObject().get("states").getAsJsonObject();
+        } else {
+            tmp = this.configs.get("test").getAsJsonObject().get("states").getAsJsonObject();
+        }
+        this.redWaitTime = tmp.get("red").getAsLong() * 1000;
+        this.yellowWaitTime = tmp.get("yellow").getAsLong() * 1000;
+        this.greenWaitTime = tmp.get("green").getAsLong() * 1000;
+    }
 }
