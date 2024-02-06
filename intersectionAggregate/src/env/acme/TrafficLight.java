@@ -74,7 +74,7 @@ public class TrafficLight extends Artifact {
             this.setWaitingTimes(flowOfTraffic);
         }
         this.sendRedIntersection();
-        this.waitAndSpawnVehicles(redWaitTime, 50, 50);
+        this.waitAndSpawnVehicles(redWaitTime, 500, 50);
     }
 
     @OPERATION
@@ -113,6 +113,24 @@ public class TrafficLight extends Artifact {
     private void changePace(final String pace) {
         this.flowOfTraffic = pace;
         this.setWaitingTimes(flowOfTraffic);
+    }
+
+    @OPERATION
+    private void addNormalVehicle() {
+        this.lane.getVehiclesOnLane().add(new Vehicle(VehicleType.Normal));
+        ObsProperty normalCarsProp = getObsProperty("normalVehicles");
+        normalCarsProp.updateValue(normalCarsProp.intValue() + 1);
+
+        getObsProperty("totalVehicles").updateValue(getObsProperty("normalVehicles").intValue() + getObsProperty("emergencyVehicles").intValue());
+    }
+
+    @OPERATION
+    private void addEmergencyVehicle() {
+        this.lane.getVehiclesOnLane().add(new Vehicle(VehicleType.Emergency));
+        ObsProperty normalCarsProp = getObsProperty("emergencyVehicles");
+        normalCarsProp.updateValue(normalCarsProp.intValue() + 1);
+
+        getObsProperty("totalVehicles").updateValue(getObsProperty("normalVehicles").intValue() + getObsProperty("emergencyVehicles").intValue());
     }
 
     @INTERNAL_OPERATION
