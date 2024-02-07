@@ -6,30 +6,30 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      email: '',
+      name: '',
+      surname: '',
       password: '',
     }
   },
   computed: {
-    ...mapGetters("user", ["email"]),
+    ...mapGetters("user", ["name", "surname"]),
   },
   methods: {
     checkIfRegistered() {
       const user = {
         email: this.email,
+        surname: this.surname,
         password: this.password,
       };
 
       axios
-          .post('http://127.0.0.1:3000/login', user)
+          .get('http://localhost:8080/users')
           .then((res) => {
             sweetalert({
               text: "User logged in succesfully",
               icon: "success"
             })
-            this.$store.commit("user/login", this.email)
-            // console.log(this.email)
-            this.$router.push("/")
+            console.log(res.data);
 
           })
           .catch((err) => {
@@ -57,8 +57,12 @@ export default {
       <div class="col-6">
         <form>
           <div class="form-group">
-            <label>User email</label>
-            <input type="text" class="form-control" v-model="email">
+            <label>User name</label>
+            <input type="text" class="form-control" v-model="name">
+          </div>
+          <div class="form-group">
+            <label>User surname</label>
+            <input type="text" class="form-control" v-model="surname">
           </div>
           <div class="form-group">
             <label>User Password</label>
