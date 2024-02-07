@@ -3,13 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "format": "prettier --write src/",
+    "serve": "vue-cli-service serve"
   },
   "dependencies": {
     "core-js": "^3.8.3",
-    "vue": "^3.2.13"
+    "animate.css": "^4.1.1",
+    "axios": "^1.4.0",
+    "bootstrap": "^5.2.3",
+    "bootstrap-vue": "^2.23.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.4.1",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
+    "sweetalert": "^2.1.2",
+    "vue": "^3.2.47",
+    "vue-router": "^4.2.0",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -17,8 +32,14 @@
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3"
+    "@rushstack/eslint-patch": "^1.2.0",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/eslint-config-prettier": "^7.1.0",
+    "eslint": "^8.34.0",
+    "eslint-plugin-vue": "^9.9.0",
+    "prettier": "^2.8.4",
+    "sass": "^1.66.1",
+    "vite": "^4.1.4"
   },
   "eslintConfig": {
     "root": true,
