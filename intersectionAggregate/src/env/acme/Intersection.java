@@ -31,7 +31,7 @@ public class Intersection extends Artifact {
     private void changeAllPace(final String pace, final String id) {
         log("TL " + id + " - With pace " + pace);
 
-        if(pace.equals("emergencyOn") || pace.equals("emergencyDone")){
+        if(pace.equals("emergencyOn") || pace.equals("emergencyDone") || pace.equals("fastDone")){
             List<String> tmp = new ArrayList<>();
             tmp.add("1"); tmp.add("2"); tmp.add("3"); tmp.add("4");
             tmp.remove(id);
@@ -41,6 +41,8 @@ public class Intersection extends Artifact {
             log("TL " + id + " is " + pace);
             if(pace.equals("emergencyOn")) {
                 log("Others are emergencyOff");
+            } else if (pace.equals("fastDone")) {
+                log("Other are fastDone");
             } else {
                 log("Other are emergencyDone");
             }
@@ -50,6 +52,8 @@ public class Intersection extends Artifact {
                     ArtifactId trafficLight = this.lookupArtifact("traffic_light_" + tmpId);
                     if(pace.equals("emergencyOn")) {
                         execLinkedOp(trafficLight, "changePace", "emergencyOff");
+                    } else if (pace.equals("fastDone")) {
+                        execLinkedOp(trafficLight, "changePace", "fastDone");
                     } else {
                         execLinkedOp(trafficLight, "changePace", "emergencyDone");
                     }
