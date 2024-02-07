@@ -69,8 +69,9 @@ public class TrafficLight extends Artifact {
             this.sendChangedPace();
             this.setWaitingTimes(flowOfTraffic);
         } else if (getObsProperty("totalVehicles").intValue() < numCarsFast && flowOfTraffic.equals("fast") && !flowOfTraffic.equals("emergencyOff")) {
-            this.flowOfTraffic = "test";
+            this.flowOfTraffic = "fastDone";
             this.sendChangedPace();
+            this.flowOfTraffic = "test";
             this.setWaitingTimes(flowOfTraffic);
         }
         this.sendRedIntersection();
@@ -167,7 +168,7 @@ public class TrafficLight extends Artifact {
                 break;
             }
 
-            if(flowOfTraffic.equals("emergencyDone")) {
+            if(flowOfTraffic.equals("emergencyDone") || flowOfTraffic.equals("fastDone")) {
                 this.flowOfTraffic = "test";
                 this.setWaitingTimes(flowOfTraffic);
                 break;
@@ -194,7 +195,7 @@ public class TrafficLight extends Artifact {
         Queue<Vehicle> lane = this.lane.getVehiclesOnLane();
         for(long i = checksPerMillis; i < timeToWaitMillis; i += checksPerMillis) {
             this.await_time(checksPerMillis);
-            if(flowOfTraffic.equals("emergencyDone")) {
+            if(flowOfTraffic.equals("emergencyDone") || flowOfTraffic.equals("fastDone")) {
                 this.flowOfTraffic = "test";
                 this.setWaitingTimes(flowOfTraffic);
                 break;
