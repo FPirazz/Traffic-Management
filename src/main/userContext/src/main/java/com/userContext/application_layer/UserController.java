@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -43,10 +44,9 @@ public class UserController {
     }
 
     @GetMapping("/users/check")
-    void one(@RequestParam String name, @RequestParam String surname, @RequestParam String Password) {
-//        User user = repo.findByName.findById(id)
-//                .orElseThrow(() -> new UserNotFoundException(id));
-//        return assembler.toModel(user);
+    boolean one(@RequestParam String name, @RequestParam String surname, @RequestParam String password) {
+        Optional<User> user = repo.findByCreds(name, surname, password);
+        return user.isPresent();
     }
 
     // POST Mappings
