@@ -11,27 +11,23 @@
         <form>
           <div class="form-group">
             <label>User First Name</label>
-            <input type="text" class="form-control" v-model="user.first_name">
+            <input type="text" class="form-control" v-model="user.name">
           </div>
           <div class="form-group">
             <label>User Last Name</label>
-            <input type="text" class="form-control" v-model="user.last_name">
+            <input type="text" class="form-control" v-model="user.surname">
           </div>
           <br>
-          <div>Would you like to be a:</div>
+          <div>Role:</div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" id="staff" value="Staff" v-model="user.permission">
-            <label class="form-check-label" for="staff">Content creator</label>
+            <input class="form-check-input" type="radio" id="staff" value="Driver" v-model="user.role">
+            <label class="form-check-label" for="staff">Driver</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" id="user" value="User" v-model="user.permission">
-            <label class="form-check-label" for="user">User</label>
+            <input class="form-check-input" type="radio" id="user" value="Operator" v-model="user.role">
+            <label class="form-check-label" for="user">Operator</label>
           </div>
           <br>
-          <div class="form-group">
-            <label>User email</label>
-            <input type="text" class="form-control" v-model="user.email">
-          </div>
           <div class="form-group">
             <label>Password</label>
             <input type="password" class="form-control" v-model="user.password">
@@ -55,29 +51,29 @@ export default {
   data() {
     return {
       user: {
-        first_name: "",
-        last_name: "",
-        permission: "",
-        email: "",
+        name: "",
+        surname: "",
         password: "",
+        role: "",
       },
     };
   },
   methods: {
     addUserToDB() {
       axios
-          .post("http://127.0.0.1:3000/register/checkExistingUser", this.user)
-          .then(() => {
-            return axios.post(
-                "http://127.0.0.1:3000/register/createUser",
-                this.user
-            );
+          .post("http://127.0.0.1:8080/users", this.user, {
+            headers: {
+              "Content-Type" : "application/json"
+            }
           })
           .then(() => {
             sweetalert({
               text: "User added successfully",
               icon: "success",
             });
+            this.$store.commit("user/login", this.user.name, this.user.surname)
+            // console.log(this.email)
+            this.$router.push("/")
           })
           .catch((err) => {
             if (err.response.status === 409) {
