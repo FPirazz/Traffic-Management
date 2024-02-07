@@ -23,13 +23,15 @@ export default {
       };
 
       axios
-          .get('http://localhost:8080/users')
+          .get('http://localhost:8080/users/check?name=' + this.name + "&surname=" + this.surname + "&password=" + this.password)
           .then((res) => {
             sweetalert({
               text: "User logged in succesfully",
               icon: "success"
             })
-            console.log(res.data);
+            this.$store.commit("user/login", this.name, this.surname)
+            // console.log(this.email)
+            this.$router.push("/")
 
           })
           .catch((err) => {
