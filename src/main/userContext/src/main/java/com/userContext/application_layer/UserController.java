@@ -42,6 +42,13 @@ public class UserController {
         return assembler.toModel(user);
     }
 
+    @GetMapping("/users/check")
+    void one(@RequestParam String name, @RequestParam String surname, @RequestParam String Password) {
+//        User user = repo.findByName.findById(id)
+//                .orElseThrow(() -> new UserNotFoundException(id));
+//        return assembler.toModel(user);
+    }
+
     // POST Mappings
     @PostMapping("/users")
     ResponseEntity<?> newUser(@RequestBody User newUser) {

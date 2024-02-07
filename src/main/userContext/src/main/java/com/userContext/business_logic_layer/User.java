@@ -18,10 +18,13 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String surname;
     @Column(nullable = false)
+    private String password;
+    @Column(nullable = false)
     private UserRole role;
-    public User(final String name, final String surname, final UserRole role) {
+    public User(final String name, final String surname, final String password, final UserRole role) {
         this.name = name;
         this.surname = surname;
+        this.password = password;
         this.role = role;
     }
 
@@ -36,6 +39,9 @@ public class User implements Serializable {
     public String getSurname() {
         return surname;
     }
+    public String getPassword() {
+        return password;
+    }
     public UserRole getRole() {
         return role;
     }
@@ -49,6 +55,9 @@ public class User implements Serializable {
     public void setSurname(String surname) {
         this.surname = surname;
     }
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public void setRole(UserRole role) {
         this.role = role;
     }
@@ -58,12 +67,11 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(role, user.role);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(password, user.password) && role == user.role;
     }
-
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, role);
+        return Objects.hash(id, name, surname, password, role);
     }
 
     @Override
@@ -72,6 +80,7 @@ public class User implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", password='" + password + '\'' +
                 ", role=" + role +
                 '}';
     }
