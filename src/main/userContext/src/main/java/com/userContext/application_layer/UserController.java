@@ -27,6 +27,7 @@ public class UserController {
     }
 
     // GET Mappings
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/users")
     CollectionModel<EntityModel<User>> all() {
         List<EntityModel<User>> user = repo.findAll().stream()
