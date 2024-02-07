@@ -161,11 +161,19 @@ public class TrafficLight extends Artifact {
             this.await_time(checksPerMillis);
             generatedNumber = rnd.nextInt(1, 100);
 
-            if(this.lane.getVehiclesOnLane().stream().anyMatch(vehicle -> vehicle.getType().equals(VehicleType.Emergency))) {
+            if(this.lane.getVehiclesOnLane().stream().anyMatch(vehicle -> vehicle.getType().equals(VehicleType.Emergency)) && !flowOfTraffic.equals("emergencyOn")) {
                 this.flowOfTraffic = "emergencyOn";
                 this.sendChangedPace();
                 break;
-            } else if(generatedNumber < chanceToSpawnNormalVehicles) {
+            }
+
+            if(flowOfTraffic.equals("emergencyDone")) {
+                this.flowOfTraffic = "test";
+                this.setWaitingTimes(flowOfTraffic);
+                break;
+            }
+
+            if(generatedNumber < chanceToSpawnNormalVehicles) {
                 this.lane.getVehiclesOnLane().add(new Vehicle(VehicleType.Normal));
                 ObsProperty normalCarsProp = getObsProperty("normalVehicles");
                 normalCarsProp.updateValue(normalCarsProp.intValue() + 1);
@@ -186,6 +194,11 @@ public class TrafficLight extends Artifact {
         Queue<Vehicle> lane = this.lane.getVehiclesOnLane();
         for(long i = checksPerMillis; i < timeToWaitMillis; i += checksPerMillis) {
             this.await_time(checksPerMillis);
+            if(flowOfTraffic.equals("emergencyDone")) {
+                this.flowOfTraffic = "test";
+                this.setWaitingTimes(flowOfTraffic);
+                break;
+            }
             if(!lane.isEmpty()){
                 tmpVehicle = lane.poll();
                 if(tmpVehicle.getType().equals(VehicleType.Normal)) {
@@ -196,9 +209,13 @@ public class TrafficLight extends Artifact {
                     ObsProperty emergencyCarsProp = getObsProperty("emergencyVehicles");
                     emergencyCarsProp.updateValue(emergencyCarsProp.intValue() - 1);
                     getObsProperty("totalVehicles").updateValue(getObsProperty("totalVehicles").intValue() - 1);
-                    this.flowOfTraffic = "test";
-                    this.sendChangedPace();
-                    break;
+
+                    if(this.lane.getVehiclesOnLane().stream().noneMatch(vehicle -> vehicle.getType().equals(VehicleType.Emergency))) {
+                        this.flowOfTraffic = "emergencyDone";
+                        this.sendChangedPace();
+                        this.flowOfTraffic = "test";
+                        break;
+                    }
                 }
             }
         }

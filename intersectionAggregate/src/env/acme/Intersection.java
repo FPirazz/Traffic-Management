@@ -31,20 +31,29 @@ public class Intersection extends Artifact {
     private void changeAllPace(final String pace, final String id) {
         log("TL " + id + " - With pace " + pace);
 
-        if(pace.equals("emergencyOn")){
+        if(pace.equals("emergencyOn") || pace.equals("emergencyDone")){
             List<String> tmp = new ArrayList<>();
             tmp.add("1"); tmp.add("2"); tmp.add("3"); tmp.add("4");
             tmp.remove(id);
 
             log("Changing pace");
             log("Current pace is");
-            log("TL " + id + " is emergencyOn");
-            log("Others are on emergencyOff");
+            log("TL " + id + " is " + pace);
+            if(pace.equals("emergencyOn")) {
+                log("Others are emergencyOff");
+            } else {
+                log("Other are emergencyDone");
+            }
 
             tmp.forEach(tmpId -> {
                 try {
                     ArtifactId trafficLight = this.lookupArtifact("traffic_light_" + tmpId);
-                    execLinkedOp(trafficLight, "changePace", "emergencyOff");
+                    if(pace.equals("emergencyOn")) {
+                        execLinkedOp(trafficLight, "changePace", "emergencyOff");
+                    } else {
+                        execLinkedOp(trafficLight, "changePace", "emergencyDone");
+                    }
+
                 } catch (OperationException e) {
                     throw new RuntimeException(e);
                 }
@@ -53,9 +62,6 @@ public class Intersection extends Artifact {
 
             String pace1_3;
             String pace2_4;
-
-
-
             if (pace.equals("fast")) {
                 if (Integer.parseInt(id) % 2 == 1) {
                     pace1_3 = "fast";
@@ -97,6 +103,7 @@ public class Intersection extends Artifact {
     public void trIsDone(final String id) {
         this.tempIds.add(id);
         this.ids.remove(id);
+
         if(tempIds.size() == 2 && ids.size() == 2) {
             Collections.sort(tempIds);
             try {
