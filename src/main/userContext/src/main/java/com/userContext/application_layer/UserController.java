@@ -36,6 +36,7 @@ public class UserController {
                 .collect(Collectors.toList());
         return CollectionModel.of(user, linkTo(methodOn(UserController.class).all()).withSelfRel());
     }
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/users/{id}")
     EntityModel<User> one(@PathVariable Long id) {
         User user = repo.findById(id)
@@ -43,6 +44,7 @@ public class UserController {
         return assembler.toModel(user);
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/users/check")
     boolean one(@RequestParam String name, @RequestParam String surname, @RequestParam String password) {
         Optional<User> user = repo.findByCreds(name, surname, password);
@@ -50,6 +52,7 @@ public class UserController {
     }
 
     // POST Mappings
+    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/users")
     ResponseEntity<?> newUser(@RequestBody User newUser) {
         EntityModel<User> entityModel = assembler.toModel(repo.save(newUser));
@@ -59,6 +62,7 @@ public class UserController {
     }
 
     // PUT Mappings
+    @CrossOrigin(origins = "http://localhost:5173")
     @PutMapping("/users/{id}")
     ResponseEntity<?> replaceUser(@RequestBody User newUser, @PathVariable Long id) {
         User updatedUser = repo.findById(id)
@@ -80,6 +84,7 @@ public class UserController {
     }
 
     // DELETE Mappings
+    @CrossOrigin(origins = "http://localhost:5173")
     @DeleteMapping("/users/{id}")
     ResponseEntity<?> deleteUser(@PathVariable Long id) {
         repo.deleteById(id);
