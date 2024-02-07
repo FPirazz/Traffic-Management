@@ -52,7 +52,7 @@ export default {
       <div class="col-12 text-center">
         <h3 class="pt-3">Login Form</h3>
       </div>
-    </div>*
+    </div>
     <div class="row">
       <!--Utilizzo bootstrap per creare il form-->
       <div class="col-3"></div>
