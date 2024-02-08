@@ -1,10 +1,12 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="card-body text-center">
-        <h5 class="card-title">Intersection Test 1</h5>
-        <p class="card-text">Address - Address Test 1</p>
-      </div>
+      <RouterLink class="nav-link" :to="{ name: 'IntersectionPage' }">
+        <div class="card-body text-center">
+          <h5 class="card-title">Intersection Test 1</h5>
+          <p class="card-text">Address - Address Test 1</p>
+        </div>
+      </RouterLink>
     </div>
   </div>
 </template>
