@@ -6,9 +6,9 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      name: '',
-      surname: '',
-      password: '',
+      loginName: '',
+      loginSurname: '',
+      loginPassword: '',
     }
   },
   computed: {
@@ -16,21 +16,16 @@ export default {
   },
   methods: {
     checkIfRegistered() {
-      const user = {
-        email: this.email,
-        surname: this.surname,
-        password: this.password,
-      };
-
       axios
-          .get('http://localhost:8080/users/check?name=' + this.name + "&surname=" + this.surname + "&password=" + this.password)
+          .get('http://localhost:8080/users/check?name=' + this.loginName + "&surname=" + this.loginSurname + "&password=" + this.loginPassword)
           .then((res) => {
             sweetalert({
               text: "User logged in succesfully",
               icon: "success"
             })
-            this.$store.commit("user/login", this.name, this.surname)
-            // console.log(this.email)
+            this.$store.commit("user/loginName", this.loginName)
+            this.$store.commit("user/loginSurname", this.loginSurname)
+
             this.$router.push("/")
 
           })
@@ -60,15 +55,15 @@ export default {
         <form>
           <div class="form-group">
             <label>User name</label>
-            <input type="text" class="form-control" v-model="name">
+            <input type="text" class="form-control" v-model="loginName">
           </div>
           <div class="form-group">
             <label>User surname</label>
-            <input type="text" class="form-control" v-model="surname">
+            <input type="text" class="form-control" v-model="loginSurname">
           </div>
           <div class="form-group">
             <label>User Password</label>
-            <input type="password" class="form-control" v-model="password">
+            <input type="password" class="form-control" v-model="loginPassword">
           </div>
           <br>
           <div class="text-center">

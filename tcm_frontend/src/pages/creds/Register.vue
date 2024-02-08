@@ -71,7 +71,8 @@ export default {
               text: "User added successfully",
               icon: "success",
             });
-            this.$store.commit("user/login", this.user.name, this.user.surname)
+            this.$store.commit("user/loginName", this.user.name)
+            this.$store.commit("user/loginSurname", this.user.surname)
             // console.log(this.email)
             this.$router.push("/")
           })
