@@ -3,15 +3,15 @@
     <div class="row">
       <div class="col-sm">
         <p>Traffic Light 1</p>
-        <p v-if="tl1.state == 'red'" class="text-white bg-danger">State - {{ tl1.state }}</p>
+        <p v-if="tl1.state === 'red'" class="text-white bg-danger">State - {{ tl1.state }}</p>
         <p v-else-if="tl1.state == 'yellow'" class="bg-warning">State - {{ tl1.state }}</p>
         <p v-else class="text-white bg-success">State - {{ tl1.state }}</p>
         <p>Pace - {{ tl1.pace }}</p>
         <p>Total Vehicles - {{ tl1.totalVehicles }}</p>
         <p>Normal Vehicles - {{ tl1.normalVehicles }}</p>
         <p>Emergency Vehicles - {{ tl1.emergencyVehicles }}</p>
-        <button type="button" class="btn btn-primary" @click="this.addNormalVehicle1">Add Normal Vehicle</button>
-        <button type="button" class="btn btn-secondary" @click="this.addEmergencyVehicle1">Add Emergency Vehicle</button>
+        <button type="button" class="btn btn-primary" @click="this.addNormalVehicle1" v-if="this.role === 'Operator'">Add Normal Vehicle</button>
+        <button type="button" class="btn btn-secondary" @click="this.addEmergencyVehicle1" v-if="this.role === 'Operator'">Add Emergency Vehicle</button>
       </div>
       <div class="col-sm">
         <p>Traffic Light 2</p>
@@ -22,8 +22,8 @@
         <p>Total Vehicles - {{ tl2.totalVehicles }}</p>
         <p>Normal Vehicles - {{ tl2.normalVehicles }}</p>
         <p>Emergency Vehicles - {{ tl2.emergencyVehicles }}</p>
-        <button type="button" class="btn btn-primary" @click="this.addNormalVehicle2">Add Normal Vehicle</button>
-        <button type="button" class="btn btn-secondary" @click="this.addEmergencyVehicle2">Add Emergency Vehicle</button>
+        <button type="button" class="btn btn-primary" @click="this.addNormalVehicle2" v-if="this.role === 'Operator'">Add Normal Vehicle</button>
+        <button type="button" class="btn btn-secondary" @click="this.addEmergencyVehicle2" v-if="this.role === 'Operator'">Add Emergency Vehicle</button>
       </div>
       <div class="col-sm">
         <p>Traffic Light 3</p>
@@ -34,8 +34,8 @@
         <p>Total Vehicles - {{ tl3.totalVehicles }}</p>
         <p>Normal Vehicles - {{ tl3.normalVehicles }}</p>
         <p>Emergency Vehicles - {{ tl3.emergencyVehicles }}</p>
-        <button type="button" class="btn btn-primary" @click="this.addNormalVehicle3">Add Normal Vehicle</button>
-        <button type="button" class="btn btn-secondary" @click="this.addEmergencyVehicle3">Add Emergency Vehicle</button>
+        <button type="button" class="btn btn-primary" @click="this.addNormalVehicle3" v-if="this.role === 'Operator'">Add Normal Vehicle</button>
+        <button type="button" class="btn btn-secondary" @click="this.addEmergencyVehicle3" v-if="this.role === 'Operator'">Add Emergency Vehicle</button>
       </div>
       <div class="col-sm">
         <p>Traffic Light 4</p>
@@ -46,13 +46,13 @@
         <p>Total Vehicles - {{ tl4.totalVehicles }}</p>
         <p>Normal Vehicles - {{ tl4.normalVehicles }}</p>
         <p>Emergency Vehicles - {{ tl4.emergencyVehicles }}</p>
-        <button type="button" class="btn btn-primary" @click="this.addNormalVehicle4">Add Normal Vehicle</button>
-        <button type="button" class="btn btn-secondary" @click="this.addEmergencyVehicle4">Add Emergency Vehicle</button>
+        <button type="button" class="btn btn-primary" @click="this.addNormalVehicle4" v-if="this.role === 'Operator'">Add Normal Vehicle</button>
+        <button type="button" class="btn btn-secondary" @click="this.addEmergencyVehicle4" v-if="this.role === 'Operator'">Add Emergency Vehicle</button>
       </div>
     </div>
     <br>
     <hr class="hr" />
-    <div class="row">
+    <div class="row" v-if="this.role === 'Operator'">
       <div class="col">
         <p>Change Traffic Light 1 - 3 Color To:</p>
         <button type="button" class="btn btn-danger" @click="this.click13Red">Red</button>
@@ -109,7 +109,7 @@ export default {
     }
   },
   computed: {
-
+    ...mapGetters("user", ["role"]),
   },
   methods: {
     async getIntersection() {
