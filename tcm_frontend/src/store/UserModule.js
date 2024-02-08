@@ -3,10 +3,12 @@ const userModule = {
     state: {
         name: localStorage.getItem("name") ? localStorage.getItem("name") : "",
         surname: localStorage.getItem("surname") ? localStorage.getItem("surname") : "",
+        role: localStorage.getItem("role") ? localStorage.getItem("role") : "",
     },
     getters: {
         name: (state) => state.name,
         surname: (state) => state.surname,
+        role: (state) => state.role,
         isLoggedIn: (state) => !!state.name && !!state.surname,
     },
     mutations: {
@@ -17,6 +19,10 @@ const userModule = {
         loginSurname(state, surname) {
             state.surname = surname;
             localStorage.setItem("surname", surname);
+        },
+        loginRole(state, role) {
+            state.role = role;
+            localStorage.setItem("role", role);
         },
         logout(state) {
             state.name = "";

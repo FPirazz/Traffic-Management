@@ -23,11 +23,14 @@ export default {
               text: "User logged in succesfully",
               icon: "success"
             })
-            this.$store.commit("user/loginName", this.loginName)
-            this.$store.commit("user/loginSurname", this.loginSurname)
-
-            this.$router.push("/")
-
+            axios.get('http://localhost:8080/users')
+                .then((res) => {
+                  var user = this.getUserByCreds(res.data._embedded.userList, this.loginName, this.loginSurname, this.loginPassword)
+                  this.$store.commit("user/loginName", this.loginName)
+                  this.$store.commit("user/loginSurname", this.loginSurname)
+                  this.$store.commit("user/loginRole", user[0].role)
+                  this.$router.push("/")
+                });
           })
           .catch((err) => {
             sweetalert({
@@ -36,6 +39,13 @@ export default {
             });
             console.log("Errore di tipo: " + err)
           });
+    },
+    getUserByCreds(data, name, surname, password) {
+      return data.filter(
+          function(data){
+            return data.name == name && data.surname == surname && data.password == password
+          }
+      );
     }
   }
 }
