@@ -50,6 +50,22 @@
         <button type="button" class="btn btn-secondary" @click="this.addEmergencyVehicle4">Add Emergency Vehicle</button>
       </div>
     </div>
+    <br>
+    <hr class="hr" />
+    <div class="row">
+      <div class="col">
+        <p>Change Traffic Light 1 - 3 Color To:</p>
+        <button type="button" class="btn btn-danger" @click="this.click13Red">Red</button>
+        <br>
+        <button type="button" class="btn btn-success" @click="this.click13Green">Green</button>
+      </div>
+      <div class="col-3">
+        <p>Change Traffic Light 2 - 4 Color To:</p>
+        <button type="button" class="btn btn-danger" @click="this.click24Red">Red</button>
+        <br>
+        <button type="button" class="btn btn-success" @click="this.click24Green">Green</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -230,6 +246,94 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+
+    async turn13Red() {
+      try {
+        await axios.post("http://localhost:8085/tl1TurnRed", [], {
+          Headers: {
+            "Content-Type": "application/json",
+          }
+        })
+
+        await axios.post("http://localhost:8085/tl3TurnRed", [], {
+          Headers: {
+            "Content-Type": "application/json",
+          }
+        })
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async turn24Red() {
+      try {
+        await axios.post("http://localhost:8085/tl2TurnRed", [], {
+          Headers: {
+            "Content-Type": "application/json",
+          }
+        })
+
+        await axios.post("http://localhost:8085/tl4TurnRed", [], {
+          Headers: {
+            "Content-Type": "application/json",
+          }
+        })
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async turn13Green() {
+      try {
+        await axios.post("http://localhost:8085/tl1TurnGreen", [], {
+          Headers: {
+            "Content-Type": "application/json",
+          }
+        })
+
+        await axios.post("http://localhost:8085/tl3TurnGreen", [], {
+          Headers: {
+            "Content-Type": "application/json",
+          }
+        })
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async turn24Green() {
+      try {
+        await axios.post("http://localhost:8085/tl2TurnGreen", [], {
+          Headers: {
+            "Content-Type": "application/json",
+          }
+        })
+
+        await axios.post("http://localhost:8085/tl4TurnGreen", [], {
+          Headers: {
+            "Content-Type": "application/json",
+          }
+        })
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async click13Red() {
+      await this.turn13Red();
+      await this.turn24Green();
+    },
+    async click13Green() {
+      await this.turn13Green();
+      await this.turn24Red();
+    },
+
+    async click24Red() {
+      await this.turn24Red();
+      await this.turn13Green();
+    },
+    async click24Green() {
+      await this.turn24Green();
+      await this.turn13Red();
     },
 
     async pollData() {
