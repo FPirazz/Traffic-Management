@@ -73,6 +73,7 @@ export default {
             });
             this.$store.commit("user/loginName", this.user.name)
             this.$store.commit("user/loginSurname", this.user.surname)
+            this.$store.commit("user/loginRole", this.user.role)
             // console.log(this.email)
             this.$router.push("/")
           })
