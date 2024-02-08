@@ -9,6 +9,8 @@
         <p>Total Vehicles - {{ tl1.totalVehicles }}</p>
         <p>Normal Vehicles - {{ tl1.normalVehicles }}</p>
         <p>Emergency Vehicles - {{ tl1.emergencyVehicles }}</p>
+        <button type="button" class="btn btn-primary" @click="this.addNormalVehicle1">Add Normal Vehicle</button>
+        <button type="button" class="btn btn-secondary" @click="this.addEmergencyVehicle1">Add Emergency Vehicle</button>
       </div>
       <div class="col-sm">
         <p>Traffic Light 2</p>
@@ -18,6 +20,8 @@
         <p>Total Vehicles - {{ tl2.totalVehicles }}</p>
         <p>Normal Vehicles - {{ tl2.normalVehicles }}</p>
         <p>Emergency Vehicles - {{ tl2.emergencyVehicles }}</p>
+        <button type="button" class="btn btn-primary" @click="this.addNormalVehicle2">Add Normal Vehicle</button>
+        <button type="button" class="btn btn-secondary" @click="this.addEmergencyVehicle2">Add Emergency Vehicle</button>
       </div>
       <div class="col-sm">
         <p>Traffic Light 3</p>
@@ -27,6 +31,8 @@
         <p>Total Vehicles - {{ tl3.totalVehicles }}</p>
         <p>Normal Vehicles - {{ tl3.normalVehicles }}</p>
         <p>Emergency Vehicles - {{ tl3.emergencyVehicles }}</p>
+        <button type="button" class="btn btn-primary" @click="this.addNormalVehicle3">Add Normal Vehicle</button>
+        <button type="button" class="btn btn-secondary" @click="this.addEmergencyVehicle3">Add Emergency Vehicle</button>
       </div>
       <div class="col-sm">
         <p>Traffic Light 4</p>
@@ -36,6 +42,8 @@
         <p>Total Vehicles - {{ tl4.totalVehicles }}</p>
         <p>Normal Vehicles - {{ tl4.normalVehicles }}</p>
         <p>Emergency Vehicles - {{ tl4.emergencyVehicles }}</p>
+        <button type="button" class="btn btn-primary" @click="this.addNormalVehicle4">Add Normal Vehicle</button>
+        <button type="button" class="btn btn-secondary" @click="this.addEmergencyVehicle4">Add Emergency Vehicle</button>
       </div>
     </div>
   </div>
@@ -122,7 +130,97 @@ export default {
       }
     },
 
-    pollData() {
+    async addNormalVehicle1() {
+      try {
+        await axios.post("http://localhost:8085/tl1AddNormalVehicle", [], {
+          Headers: {
+            "Content-Type": "application/json",
+          }
+        })
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async addNormalVehicle2() {
+      try {
+        await axios.post("http://localhost:8085/tl2AddNormalVehicle", [], {
+          Headers: {
+            "Content-Type": "application/json",
+          }
+        })
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async addNormalVehicle3() {
+      try {
+        await axios.post("http://localhost:8085/tl3AddNormalVehicle", [], {
+          Headers: {
+            "Content-Type": "application/json",
+          }
+        })
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async addNormalVehicle4() {
+      try {
+        await axios.post("http://localhost:8085/tl4AddNormalVehicle", [], {
+          Headers: {
+            "Content-Type": "application/json",
+          }
+        })
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async addEmergencyVehicle1() {
+      try {
+        await axios.post("http://localhost:8085/tl1AddEmergencyVehicle", [], {
+          Headers: {
+            "Content-Type": "application/json",
+          }
+        })
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async addEmergencyVehicle2() {
+      try {
+        await axios.post("http://localhost:8085/tl2AddEmergencyVehicle", [], {
+          Headers: {
+            "Content-Type": "application/json",
+          }
+        })
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async addEmergencyVehicle3() {
+      try {
+        await axios.post("http://localhost:8085/tl3AddEmergencyVehicle", [], {
+          Headers: {
+            "Content-Type": "application/json",
+          }
+        })
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async addEmergencyVehicle4() {
+      try {
+        await axios.post("http://localhost:8085/tl4AddEmergencyVehicle", [], {
+          Headers: {
+            "Content-Type": "application/json",
+          }
+        })
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async pollData() {
       this.polling = () => {
         setTimeout(async () => {
           await this.getIntersection();
@@ -141,7 +239,7 @@ export default {
   async mounted() {
     await this.getIntersection();
     await this.isOperatorLogged();
-    this.pollData();
+    await this.pollData();
   },
 
 };
