@@ -13,6 +13,7 @@ import NavButton from "@/components/NavButton.vue"
       <div v-if="isLoggedIn" class="collapse navbar-collapse" id="navContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <NavButton route-name="Home" @counter-clicked="onChildClicked" />
+          <NavButton route-name="Intersections" @counter-clicked="onChildClicked" />
           <NavButton route-name="Logout" @click="this.$store.commit('user/logout')" @counter-clicked="onChildClicked" />
         </ul>
       </div>
