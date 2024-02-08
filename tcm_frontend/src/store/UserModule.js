@@ -5,13 +5,17 @@ const userModule = {
         surname: localStorage.getItem("surname") ? localStorage.getItem("surname") : "",
     },
     getters: {
+        name: (state) => state.name,
+        surname: (state) => state.surname,
         isLoggedIn: (state) => !!state.name && !!state.surname,
     },
     mutations: {
-        login(state, name, surname) {
+        loginName(state, name) {
             state.name = name;
-            state.surname = surname;
             localStorage.setItem("name", name);
+        },
+        loginSurname(state, surname) {
+            state.surname = surname;
             localStorage.setItem("surname", surname);
         },
         logout(state) {
