@@ -70,6 +70,7 @@ public class UserController {
                     user.setName(newUser.getName());
                     user.setSurname(newUser.getSurname());
                     user.setRole(newUser.getRole());
+                    user.setPassword(newUser.getPassword());
                     return repo.save(user);
                 })
                 .orElseGet(() -> {
