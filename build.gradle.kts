@@ -25,3 +25,11 @@ allprojects {
         mavenCentral()
     }
 }
+
+tasks.register("runAll") {
+    group = "run"
+    description = "Runs all the necessary component for the application"
+    dependsOn(":userContext:runUserApplication")
+    dependsOn(":tcm_frontend:npmRunVite")
+    dependsOn(":intersectionAggregate:runAgents")
+}
