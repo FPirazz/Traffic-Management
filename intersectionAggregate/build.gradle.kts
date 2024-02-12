@@ -1,5 +1,3 @@
-import org.apache.tools.ant.taskdefs.Java
-
 apply(".jcm-deps.gradle")
 
 plugins {
@@ -17,21 +15,17 @@ sourceSets {
             srcDirs("src/resources")
         }
     }
-
 }
 
 repositories {
     maven { url = uri("https://raw.githubusercontent.com/jacamo-lang/mvn-repo/master") }
     maven { url = uri( "https://repo.gradle.org/gradle/libs-releases") }
     maven { url = uri( "https://jitpack.io") }
-
     flatDir { dirs("lib") }
-
-    mavenCentral()
 }
 
 dependencies {
-    implementation("org.jacamo:jacamo:1.2")
+    implementation("org.jacamo:jacamo:1.2.2")
     implementation("org.jacamo:cartago:3.1")
     implementation("com.fasterxml.jackson.core:jackson-core:2.9.8")
     implementation("org.jacamo:jacamo-rest:0.7")
