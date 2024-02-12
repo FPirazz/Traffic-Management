@@ -24,8 +24,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-hateoas")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-test")
 
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework:spring-webflux")
     testImplementation("org.assertj:assertj-core:3.11.1")
     testImplementation("org.reactivestreams:reactive-streams")
@@ -47,4 +47,12 @@ tasks.test {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+task<JavaExec>("runUserApplication") {
+    group = "userContext"
+    description = "Runs the User Context application"
+    mainClass = "com.userContext.infrastructure_layer.springBoot.UserApplication"
+
+    classpath(sourceSets.main.get().runtimeClasspath)
 }
