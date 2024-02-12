@@ -33,3 +33,24 @@ tasks.register("runAll") {
     dependsOn(":tcm_frontend:npmRunVite")
     dependsOn(":intersectionAggregate:runAgents")
 }
+
+tasks.register("cleanAll") {
+    group = "build"
+    dependsOn(":userContext:clean")
+    dependsOn(":tcm_frontend:npmClean")
+    dependsOn(":intersectionAggregate:clean")
+}
+
+tasks.register("buildAll") {
+    group = "build"
+    dependsOn(":userContext:build")
+    dependsOn(":tcm_frontend:npmBuildProject")
+    dependsOn(":intersectionAggregate:build")
+}
+
+tasks.register("cleanAndBuildAll") {
+    group = "build"
+    description = "Builds and cleans all the subproject of the application"
+    dependsOn("cleanAll")
+    dependsOn("buildAll")
+}
