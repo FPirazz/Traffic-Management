@@ -16,7 +16,6 @@ sourceSets {
         }
     }
 }
-
 repositories {
     maven { url = uri("https://raw.githubusercontent.com/jacamo-lang/mvn-repo/master") }
     maven { url = uri( "https://repo.gradle.org/gradle/libs-releases") }

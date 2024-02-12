@@ -14,6 +14,10 @@ java {
     sourceCompatibility = JavaVersion.VERSION_19
 }
 
+tasks.wrapper {
+    gradleVersion = "8.2"
+}
+
 allprojects {
     group = "org.SPE_SAP"
     version = "0.0.1-SNAPSHOT"
