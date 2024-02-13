@@ -59,9 +59,17 @@ tasks.register<NpmTask>("npmRunProject") {
     npmCommand.add("dev")
 }
 
+tasks.register<NpmTask>("npmInstallProject") {
+    group = "npm"
+    description = "Installs the package.json"
+    workingDir = file(projectDir.path)
+    npmCommand.add("install")
+}
+
 tasks.register("npmBuildProject") {
     group = "npm"
     description = "Runs the build script for the Vue project"
+    dependsOn(tasks.getByName("npmInstallProject"))
     dependsOn(tasks.getByName("npmClean"))
     dependsOn(tasks.getByName("npmRunBuild"))
 }
