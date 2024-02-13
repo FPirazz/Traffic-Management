@@ -5,7 +5,16 @@ import org.codehaus.groovy.ast.tools.GeneralUtils.args
 import org.gradle.launcher.daemon.protocol.Build
 
 plugins {
+    java
     id("com.github.node-gradle.node") version "7.0.2"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("commons-io:commons-io:2.6")
 }
 
 node {
@@ -79,6 +88,7 @@ tasks.register("npmRunVite") {
     description = "Runs the Vue project via Vite"
     dependsOn(tasks.getByName("npmRunProject"))
 }
+
 
 
 

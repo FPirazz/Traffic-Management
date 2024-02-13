@@ -2,7 +2,7 @@
 FROM openjdk:19-jdk-alpine
 
 # Set a directory for the app
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Install bash
 RUN apk add --no-cache bash

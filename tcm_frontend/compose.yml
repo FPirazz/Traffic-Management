@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+
+  vue-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vue-app
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - vue-network
+networks:
+  vue-network:
+    driver: bridge
+
+  #Per aggiungere un nuovo servizio
+  #Seguire il template:
+
+  #nome-servizio:
+    #image:
+    #ports:
+    #container-name:
+    # ecc.. ecc... (cambia a seconda delle necessità ma questi 3 sono quasi sempre obbligatori).
+
+  #Eseguire il comando "docker compose up" e fa tutto lui.

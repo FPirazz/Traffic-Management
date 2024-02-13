@@ -53,4 +53,9 @@ tasks.register("cleanAndBuildAll") {
     description = "Builds and cleans all the subproject of the application"
     dependsOn("cleanAll")
     dependsOn("buildAll")
+    dependsOn("makeVueToJar")
+    //dependsOn("makeUserContextJar")
+    //dependsOn("makeIntersectionAggregateJar")
 }
+
+
