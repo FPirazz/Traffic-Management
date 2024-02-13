@@ -1,8 +1,11 @@
 apply(".jcm-deps.gradle")
 
+project.setProperty("mainClassName", "jacamo.infra.JaCaMoLauncher")
+
 plugins {
     id("java")
     id("maven-publish")
+    id("com.github.johnrengelman.shadow") version "8.1.1"
     application
 }
 
