@@ -1,17 +1,28 @@
 # Start from the official OpenJDK Docker image
-FROM openjdk:17-jdk-alpine
+FROM openjdk:19-jdk-alpine
 
 # Set a directory for the app
 WORKDIR /usr/src/app
 
-# Copy all project files into the docker image
+# Install bash
+RUN apk add --no-cache bash
+
+# Copy the rest of the project files into the docker image
 COPY . .
 
-# Compile the Java application
-RUN javac src/main/java/App.java
+RUN chmod +x ./gradlew
 
-# Set the command to run your Java application
-CMD ["java", "-cp", "src/main/java", "App"]
+# Remove Windows line endings from gradlew
+RUN sed -i -e 's/\r$//' gradlew
+
+# Build the project
+RUN ./gradlew build --parallel
+
+# Run the app using gradle
+CMD ["./gradlew", "run"]
+
+# Set bash as the entrypoint
+ENTRYPOINT ["bash"]
 
 # Commands for image generation and image execution
 # docker build -t java-image .
