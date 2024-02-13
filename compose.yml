@@ -2,18 +2,31 @@ version: "3.7"
 
 services:
 
-  vue-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: vue-app
+#  vue-app:
+#    build:
+#      context: tcm_frontend
+#      dockerfile: Dockerfile
+#    container_name: vue-app
+#    restart: always
+#    ports:
+#      - "8080:8080"
+#    networks:
+#      - vue-network
+
+  user-db:
+    image: "sap-spe-db:latest"
+    container_name: user-db
     restart: always
     ports:
-      - "8080:8080"
+      - "8082:8082"
+      - "9082:9082"
     networks:
-      - vue-network
+      - db-network
+
 networks:
-  vue-network:
+#  vue-network:
+#    driver: bridge
+  db-network:
     driver: bridge
 
   #Per aggiungere un nuovo servizio
