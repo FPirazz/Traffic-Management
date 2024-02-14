@@ -2,20 +2,18 @@ version: "3.7"
 
 services:
 
-#  vue-app:
-#    build:
-#      context: tcm_frontend
-#      dockerfile: Dockerfile
-#    container_name: vue-app
-#    restart: always
-#    ports:
-#      - "8080:8080"
-#    networks:
-#      - vue-network
+  vue-app:
+    build:
+      context: tcm_frontend
+      dockerfile: Dockerfile
+    container_name: vue-app
+    restart: always
+    ports:
+      - "8080:80"
 
-  user_db:
+  user-db:
     image: "fpirazzoli/sap_spe_db:latest"
-    container_name: user_db
+    container_name: user-db
     restart: always
     ports:
       - "8082:8082"
@@ -38,6 +36,12 @@ services:
     restart: always
     ports:
       - "9080:9080"
+#  nginx:
+#    image: "nginx:latest"
+#    container_name: nginx
+#    restart: always
+#    ports:
+#      - "8085:80"
 
     #Per aggiungere un nuovo servizio
   #Seguire il template:

@@ -61,9 +61,9 @@ export default {
   methods: {
     addUserToDB() {
       axios
-          .post("http://127.0.0.1:8080/users", this.user, {
+          .post("/users", this.user, {
             headers: {
-              "Content-Type" : "application/json"
+              "Content-Type" : "application/json",
             }
           })
           .then(() => {

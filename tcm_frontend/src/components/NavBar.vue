@@ -14,7 +14,7 @@ import NavButton from "@/components/NavButton.vue"
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <NavButton route-name="Home" @counter-clicked="onChildClicked" />
           <NavButton route-name="Intersections" @counter-clicked="onChildClicked" />
-          <NavButton route-name="Logout" @click="this.$store.commit('user/logout')" @counter-clicked="onChildClicked" />
+          <NavButton route-name="Logout" @click="logout" @counter-clicked="onChildClicked" />
         </ul>
       </div>
       <div v-else class="collapse navbar-collapse" id="navContent">
@@ -40,6 +40,9 @@ export default {
     onChildClicked() {
       this.$emit('counter-clicked');
     },
+    logout() {
+      this.$store.commit('user/logout')
+    }
   },
 };
 </script>

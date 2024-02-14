@@ -1,15 +1,13 @@
-FROM node:14-alpine
-# install simple http server for serving static content
-RUN npm install -g http-server
-# make the 'app' folder the current working directory
+FROM node:lts-alpine as build-stage
 WORKDIR /app
-# copy 'package.json' to install dependencies
-COPY package*.json ./
-# install dependencies
-RUN npm install
-# copy files and folders to the current working directory (i.e. 'app' folder)
 COPY . .
-# build app for production with minification
+RUN npm install
 RUN npm run build
+
+# production stage
+FROM nginx:stable-alpine as production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY --from=build-stage /app/nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80
 EXPOSE 8080
-CMD [ "http-server", "dist" ]
+CMD ["nginx", "-g", "daemon off;"]

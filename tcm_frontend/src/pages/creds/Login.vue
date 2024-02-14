@@ -17,24 +17,31 @@ export default {
   methods: {
     checkIfRegistered() {
       axios
-          .get('http://localhost:8080/users/check?name=' + this.loginName + "&surname=" + this.loginSurname + "&password=" + this.loginPassword)
+          .get('/users/check?name=' + this.loginName + "&surname=" + this.loginSurname + "&password=" + this.loginPassword)
           .then((res) => {
-            sweetalert({
-              text: "User logged in succesfully",
-              icon: "success"
-            })
-            axios.get('http://localhost:8080/users')
-                .then((res) => {
-                  var user = this.getUserByCreds(res.data._embedded.userList, this.loginName, this.loginSurname, this.loginPassword)
-                  this.$store.commit("user/loginName", this.loginName)
-                  this.$store.commit("user/loginSurname", this.loginSurname)
-                  this.$store.commit("user/loginRole", user[0].role)
-                  this.$router.push("/")
-                });
+            if(res.data) {
+              sweetalert({
+                text: "User logged in succesfully",
+                icon: "success"
+              })
+              axios.get('/users')
+                  .then((res) => {
+                    var user = this.getUserByCreds(res.data._embedded.userList, this.loginName, this.loginSurname, this.loginPassword)
+                    this.$store.commit("user/loginName", this.loginName)
+                    this.$store.commit("user/loginSurname", this.loginSurname)
+                    this.$store.commit("user/loginRole", user[0].role)
+                    this.$router.push("/")
+                  });
+            } else {
+              sweetalert({
+                text: "Login failed. User not registered.",
+                icon: "error"
+              });
+            }
           })
           .catch((err) => {
             sweetalert({
-              text: "Login failed. User not registered.",
+              text: "Login failed. Network error.",
               icon: "error"
             });
             console.log("Errore di tipo: " + err)

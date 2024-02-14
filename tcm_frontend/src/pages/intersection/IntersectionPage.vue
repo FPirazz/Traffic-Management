@@ -114,7 +114,7 @@ export default {
   methods: {
     async getIntersection() {
       try {
-        await axios.get("http://localhost:8085/tl1")
+        await axios.get("/tl1")
         .then(res => {
           var content = res.data.properties;
           this.tl1.emergencyVehicles = content[1].emergencyVehicles[0];
@@ -124,7 +124,7 @@ export default {
           this.tl1.pace = content[2].pace[0];
         });
 
-        await axios.get("http://localhost:8085/tl2")
+        await axios.get("/tl2")
             .then(res => {
               var content = res.data.properties;
               this.tl2.emergencyVehicles = content[0].emergencyVehicles[0];
@@ -134,7 +134,7 @@ export default {
               this.tl2.pace = content[2].pace[0];
             });
 
-        await axios.get("http://localhost:8085/tl3")
+        await axios.get("/tl3")
             .then(res => {
               var content = res.data.properties;
               this.tl3.emergencyVehicles = content[1].emergencyVehicles[0];
@@ -144,7 +144,7 @@ export default {
               this.tl3.pace = content[2].pace[0];
             });
 
-        await axios.get("http://localhost:8085/tl4")
+        await axios.get("/tl4")
             .then(res => {
               var content = res.data.properties;
               this.tl4.emergencyVehicles = content[1].emergencyVehicles[0];
@@ -160,7 +160,7 @@ export default {
 
     async addNormalVehicle1() {
       try {
-        await axios.post("http://localhost:8085/tl1AddNormalVehicle", [], {
+        await axios.post("/tl1AddNormalVehicle", [], {
           Headers: {
             "Content-Type": "application/json",
           }
@@ -171,7 +171,7 @@ export default {
     },
     async addNormalVehicle2() {
       try {
-        await axios.post("http://localhost:8085/tl2AddNormalVehicle", [], {
+        await axios.post("/tl2AddNormalVehicle", [], {
           Headers: {
             "Content-Type": "application/json",
           }
@@ -182,7 +182,7 @@ export default {
     },
     async addNormalVehicle3() {
       try {
-        await axios.post("http://localhost:8085/tl3AddNormalVehicle", [], {
+        await axios.post("/tl3AddNormalVehicle", [], {
           Headers: {
             "Content-Type": "application/json",
           }
@@ -193,7 +193,7 @@ export default {
     },
     async addNormalVehicle4() {
       try {
-        await axios.post("http://localhost:8085/tl4AddNormalVehicle", [], {
+        await axios.post("/tl4AddNormalVehicle", [], {
           Headers: {
             "Content-Type": "application/json",
           }
@@ -205,7 +205,7 @@ export default {
 
     async addEmergencyVehicle1() {
       try {
-        await axios.post("http://localhost:8085/tl1AddEmergencyVehicle", [], {
+        await axios.post("/tl1AddEmergencyVehicle", [], {
           Headers: {
             "Content-Type": "application/json",
           }
@@ -216,7 +216,7 @@ export default {
     },
     async addEmergencyVehicle2() {
       try {
-        await axios.post("http://localhost:8085/tl2AddEmergencyVehicle", [], {
+        await axios.post("/tl2AddEmergencyVehicle", [], {
           Headers: {
             "Content-Type": "application/json",
           }
@@ -227,7 +227,7 @@ export default {
     },
     async addEmergencyVehicle3() {
       try {
-        await axios.post("http://localhost:8085/tl3AddEmergencyVehicle", [], {
+        await axios.post("/tl3AddEmergencyVehicle", [], {
           Headers: {
             "Content-Type": "application/json",
           }
@@ -238,7 +238,7 @@ export default {
     },
     async addEmergencyVehicle4() {
       try {
-        await axios.post("http://localhost:8085/tl4AddEmergencyVehicle", [], {
+        await axios.post("/tl4AddEmergencyVehicle", [], {
           Headers: {
             "Content-Type": "application/json",
           }
@@ -250,13 +250,13 @@ export default {
 
     async turn13Red() {
       try {
-        await axios.post("http://localhost:8085/tl1TurnRed", [], {
+        await axios.post("/tl1TurnRed", [], {
           Headers: {
             "Content-Type": "application/json",
           }
         })
 
-        await axios.post("http://localhost:8085/tl3TurnRed", [], {
+        await axios.post("/tl3TurnRed", [], {
           Headers: {
             "Content-Type": "application/json",
           }
@@ -267,13 +267,13 @@ export default {
     },
     async turn24Red() {
       try {
-        await axios.post("http://localhost:8085/tl2TurnRed", [], {
+        await axios.post("/tl2TurnRed", [], {
           Headers: {
             "Content-Type": "application/json",
           }
         })
 
-        await axios.post("http://localhost:8085/tl4TurnRed", [], {
+        await axios.post("/tl4TurnRed", [], {
           Headers: {
             "Content-Type": "application/json",
           }
@@ -285,13 +285,13 @@ export default {
 
     async turn13Green() {
       try {
-        await axios.post("http://localhost:8085/tl1TurnGreen", [], {
+        await axios.post("/tl1TurnGreen", [], {
           Headers: {
             "Content-Type": "application/json",
           }
         })
 
-        await axios.post("http://localhost:8085/tl3TurnGreen", [], {
+        await axios.post("/tl3TurnGreen", [], {
           Headers: {
             "Content-Type": "application/json",
           }
@@ -302,13 +302,13 @@ export default {
     },
     async turn24Green() {
       try {
-        await axios.post("http://localhost:8085/tl2TurnGreen", [], {
+        await axios.post("/tl2TurnGreen", [], {
           Headers: {
             "Content-Type": "application/json",
           }
         })
 
-        await axios.post("http://localhost:8085/tl4TurnGreen", [], {
+        await axios.post("/tl4TurnGreen", [], {
           Headers: {
             "Content-Type": "application/json",
           }
