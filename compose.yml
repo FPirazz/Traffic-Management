@@ -14,7 +14,7 @@ services:
 #      - vue-network
 
   user_db:
-    image: "sap-spe-db:latest"
+    image: "fpirazzoli/sap_spe_db:latest"
     container_name: user_db
     restart: always
     ports:
