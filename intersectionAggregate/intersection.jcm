@@ -20,6 +20,6 @@ mas intersection {
         artifact intersection: acme.Intersection()
     }
 
-    platform: jacamo.rest.JCMRest("--restPort 9080")
+    platform: jacamo.rest.JCMRest("--rest-port 9080 --registerURL http://127.0.0.1/")
 
 }
