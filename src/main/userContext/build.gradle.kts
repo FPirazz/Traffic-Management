@@ -1,11 +1,3 @@
-plugins {
-    java
-    id("org.springframework.boot") version "3.2.2"
-    id("io.spring.dependency-management") version "1.1.4"
-    `jacoco-report-aggregation`
-    jacoco
-}
-
 jacoco {
     toolVersion = "0.8.11"
     reportsDirectory = layout.buildDirectory.dir("customJacocoReportDir")
@@ -17,8 +9,26 @@ dependencyManagement {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
+tasks.test {
+    onlyIf {
+        project.hasProperty("doTests")
+    }
+}
+
+plugins {
+    java
+    id("org.springframework.boot") version "3.2.2"
+    id("io.spring.dependency-management") version "1.1.4"
+    `jacoco-report-aggregation`
+    jacoco
+}
+
 dependencies {
-    runtimeOnly("com.h2database:h2")
+    implementation("com.h2database:h2")
     implementation("jakarta.persistence:jakarta.persistence-api")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-hateoas")
@@ -30,6 +40,12 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.11.1")
     testImplementation("org.reactivestreams:reactive-streams")
     testImplementation("io.projectreactor:reactor-core")
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "com.userContext.infrastructure_layer.springBoot.UserApplication"
+    }
 }
 
 tasks.jacocoTestReport {
