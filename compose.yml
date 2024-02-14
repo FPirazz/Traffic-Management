@@ -30,6 +30,15 @@ services:
     ports:
       - "9085:9085"
 
+  intersection-agents:
+    build:
+      context: intersectionAggregate
+      dockerfile: Dockerfile
+    container_name: intersection-agents
+    restart: always
+    ports:
+      - "9080:9080"
+
     #Per aggiungere un nuovo servizio
   #Seguire il template:
 
