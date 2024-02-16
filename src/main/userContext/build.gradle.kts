@@ -48,6 +48,13 @@ tasks.jar {
     }
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(19)
+    }
+    sourceCompatibility = JavaVersion.VERSION_19
+}
+
 tasks.jacocoTestReport {
     reports {
         xml.required = false

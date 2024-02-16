@@ -13,6 +13,13 @@ repositories {
     mavenCentral()
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(19)
+    }
+    sourceCompatibility = JavaVersion.VERSION_19
+}
+
 dependencies {
     implementation("commons-io:commons-io:2.6")
 }

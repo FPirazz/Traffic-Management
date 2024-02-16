@@ -35,6 +35,13 @@ dependencies {
     implementation("org.json:json:20231013")
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(19)
+    }
+    sourceCompatibility = JavaVersion.VERSION_19
+}
+
 task<JavaExec>("runAgents") {
     group = "JaCaMo"
     description = "Runs the JaCaMo application"
