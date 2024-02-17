@@ -5,6 +5,7 @@ import org.codehaus.groovy.ast.tools.GeneralUtils.args
 import org.gradle.launcher.daemon.protocol.Build
 
 plugins {
+    id("java")
     id("com.github.node-gradle.node") version "7.0.2"
 }
 
@@ -13,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    implementation("commons-io:commons-io:2.6")
+    implementation("commons-io:commons-io:2.15.1")
 }
 
 node {
