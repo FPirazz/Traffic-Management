@@ -5,19 +5,11 @@ import org.codehaus.groovy.ast.tools.GeneralUtils.args
 import org.gradle.launcher.daemon.protocol.Build
 
 plugins {
-    java
     id("com.github.node-gradle.node") version "7.0.2"
 }
 
 repositories {
     mavenCentral()
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(19)
-    }
-    sourceCompatibility = JavaVersion.VERSION_19
 }
 
 dependencies {

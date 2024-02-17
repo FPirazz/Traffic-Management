@@ -36,9 +36,6 @@ dependencies {
 }
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(19)
-    }
     sourceCompatibility = JavaVersion.VERSION_19
 }
 
