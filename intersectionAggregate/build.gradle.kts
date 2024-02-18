@@ -35,10 +35,6 @@ dependencies {
     implementation("org.json:json:20231013")
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_19
-}
-
 task<JavaExec>("runAgents") {
     group = "JaCaMo"
     description = "Runs the JaCaMo application"
