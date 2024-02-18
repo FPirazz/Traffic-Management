@@ -27,6 +27,14 @@ plugins {
     jacoco
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(19)
+    }
+    sourceCompatibility = JavaVersion.VERSION_19
+    targetCompatibility = JavaVersion.VERSION_19
+}
+
 dependencies {
     implementation("com.h2database:h2")
     implementation("jakarta.persistence:jakarta.persistence-api")
