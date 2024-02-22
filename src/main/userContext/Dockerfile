@@ -15,3 +15,6 @@ RUN mkdir /app
 COPY --from=build /home/gradle/src/build/libs/*.jar /app/spring-db.jar
 
 ENTRYPOINT ["java", "-jar", "/app/spring-db.jar"]
+
+
+

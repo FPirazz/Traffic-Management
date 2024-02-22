@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\Users\Xmachines\IdeaProjects\Traffic-Management\kompose-windows-amd64.exe -f compose.yml convert
+    kompose.version: 1.32.0 (765fde254)
+  labels:
+    io.kompose.service: spring-db-app
+  name: spring-db-app
+spec:
+  ports:
+    - name: "9085"
+      port: 9085
+      targetPort: 9085
+  selector:
+    io.kompose.service: spring-db-app

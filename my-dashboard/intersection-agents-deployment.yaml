@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\Users\Xmachines\IdeaProjects\Traffic-Management\kompose-windows-amd64.exe -f compose.yml convert
+    kompose.version: 1.32.0 (765fde254)
+  labels:
+    io.kompose.service: intersection-agents
+  name: intersection-agents
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: intersection-agents
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\Users\Xmachines\IdeaProjects\Traffic-Management\kompose-windows-amd64.exe -f compose.yml convert
+        kompose.version: 1.32.0 (765fde254)
+      labels:
+        io.kompose.network/traffic-management-default: "true"
+        io.kompose.service: intersection-agents
+    spec:
+      containers:
+        - image: traffic-management-intersection-agents:tag
+          name: intersection-agents
+          ports:
+            - containerPort: 9080
+              hostPort: 9080
+              protocol: TCP
+      restartPolicy: Always
