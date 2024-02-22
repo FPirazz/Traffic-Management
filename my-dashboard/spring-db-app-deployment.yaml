@@ -1,9 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: C:\Users\Xmachines\IdeaProjects\Traffic-Management\kompose-windows-amd64.exe -f compose.yml convert
-    kompose.version: 1.32.0 (765fde254)
   labels:
     io.kompose.service: spring-db-app
   name: spring-db-app
@@ -14,9 +11,6 @@ spec:
       io.kompose.service: spring-db-app
   template:
     metadata:
-      annotations:
-        kompose.cmd: C:\Users\Xmachines\IdeaProjects\Traffic-Management\kompose-windows-amd64.exe -f compose.yml convert
-        kompose.version: 1.32.0 (765fde254)
       labels:
         io.kompose.network/traffic-management-default: "true"
         io.kompose.service: spring-db-app
