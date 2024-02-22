@@ -22,7 +22,7 @@ spec:
         io.kompose.service: vue-app
     spec:
       containers:
-        - image: leomarzoli/traffic_management_system:latest
+        - image: leomarzoli/traffic_management_system:version1
           name: vue-app
           ports:
             - containerPort: 80

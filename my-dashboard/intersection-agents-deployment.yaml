@@ -22,7 +22,7 @@ spec:
         io.kompose.service: intersection-agents
     spec:
       containers:
-        - image: traffic-management-intersection-agents:tag
+        - image: leomarzoli/intersection_agent_tcm:version1
           name: intersection-agents
           ports:
             - containerPort: 9080
