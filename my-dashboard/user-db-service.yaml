@@ -5,6 +5,7 @@ metadata:
     io.kompose.service: user-db
   name: user-db
 spec:
+  clusterIP: 10.101.176.211
   ports:
     - name: "8082"
       port: 8082

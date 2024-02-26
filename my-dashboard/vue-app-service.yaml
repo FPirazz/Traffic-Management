@@ -5,6 +5,9 @@ metadata:
     io.kompose.service: vue-app
   name: vue-app
 spec:
+  clusterIP: 10.105.157.100
+  externalIPs:
+    - 15.105.192.104
   ports:
     - name: "8080"
       port: 8080

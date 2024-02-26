@@ -5,6 +5,7 @@ metadata:
     io.kompose.service: spring-db-app
   name: spring-db-app
 spec:
+  clusterIP: 10.96.35.79
   ports:
     - name: "9085"
       port: 9085

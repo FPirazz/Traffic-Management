@@ -5,6 +5,7 @@ metadata:
     io.kompose.service: intersection-agents
   name: intersection-agents
 spec:
+  clusterIP: 10.99.235.130
   ports:
     - name: "9080"
       port: 9080
