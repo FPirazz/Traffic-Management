@@ -12,3 +12,4 @@ spec:
       targetPort: 9080
   selector:
     io.kompose.service: intersection-agents
+  type: LoadBalancer  # Aggiungi questa riga per specificare il tipo NodePort

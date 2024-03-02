@@ -16,7 +16,7 @@ spec:
         io.kompose.service: spring-db-app
     spec:
       containers:
-        - image: leomarzoli/spring_db_tcm:version3
+        - image: leomarzoli/spring_db_tcm:version2
           name: spring-db-app
           ports:
             - containerPort: 9085

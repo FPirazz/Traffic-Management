@@ -15,3 +15,4 @@ spec:
       targetPort: 9092
   selector:
     io.kompose.service: user-db
+  type: LoadBalancer  # Aggiungi questa riga per specificare il tipo NodePort
