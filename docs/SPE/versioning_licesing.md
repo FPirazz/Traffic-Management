@@ -20,4 +20,4 @@ To manage versioning effectively, we have incorporated the Gradle plugin **org.d
 
 By leveraging the capabilities of this Gradle plugin, we aim to maintain a clear and meaningful version history that reflects the evolution of our project in a systematic and informative manner.
 
-[Go Back.](./index.md) [Go Next.](./index.md)
+[Go Back.](./index.md) [Go Next.](./version_control.md)
