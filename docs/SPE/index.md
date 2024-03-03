@@ -9,7 +9,7 @@
 
 ## Domain-Driven Approach
 
-- [**Domain-Driven Design - Summary.**](#domain-driven-approach-summary)
+- [**Domain-Driven Design - Summary.**](./domain-driven-approach-summary.md)
 
 ## DevOps Scenario
 
