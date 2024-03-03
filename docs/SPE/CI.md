@@ -32,3 +32,5 @@ jobs:
 
 This GitHub Actions workflow automates the Gradle project's build process triggered by pushes to the main and develop branches. The workflow sets up the environment with JDK 19, configures Gradle, and executes the build tasks.
 It ensures a consistent and efficient CI pipeline for Gradle-based development.
+
+[Go Back.](./index.md) [Go Next.](./containerization.md)
