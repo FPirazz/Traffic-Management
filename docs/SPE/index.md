@@ -13,18 +13,19 @@
 
 ## DevOps Scenario
 
-- [**Versioning and Licensing**](#versioning-and-licensing)
+- [**Versioning and Licensing**](./versioning_licesing.md)
 
-- [**Version Control**](#version-control)
+- [**Version Control**](./version_control.md)
 
-- [**Build Automation**](#build-automation)
+- [**Build Automation**](./build_automation.md)
 
 - [**Continuous Integration**](#continuous-integration)
 
+- [**Containerization**](./containerization.md)
+  
+- [**Orchestration**](./orchestration.md)
+
 - [**Auto Delivery and Deployment**](#auto-delivery-and-deployment)
-
-- [**Containerization**](#containerization)
-
 
 ## Conclusion
 
