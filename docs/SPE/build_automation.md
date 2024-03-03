@@ -95,3 +95,4 @@ So as a final step to actually test the build automation of the application one 
 gradle cleanAndBuildAll
 ```
 
+[Go Back.](./index.md) [Go Next.](./CI.md)
