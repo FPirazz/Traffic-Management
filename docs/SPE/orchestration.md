@@ -4,7 +4,7 @@ In the journey of orchestrating services with Kubernetes, several components and
 
 ## Metrics Server Deployment
 
-To enhance monitoring capabilities, the Metrics Server has been integrated into the Kubernetes cluster. This server facilitates the collection and retrieval of crucial metrics related to pods and nodes. The following files contribute to this deployment:
+To enhance monitoring capabilities, the Metrics Server has been integrated into the Kubernetes cluster. This server facilitates the collection and retrieval of crucial metrics related to pods and nodes. The following components into the `components.yaml` contribute to this deployment:
 
 - **Service Account:** `metrics-server-service-account.yaml`
 - **Cluster Roles:** `metrics-server-cluster-roles.yaml`
