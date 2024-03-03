@@ -14,22 +14,17 @@
 ## DevOps Scenario
 
 - [**Versioning and Licensing**](#versioning-and-licensing)
-  - Implements Versioning and Licensing Strategies
 
 - [**Version Control**](#version-control)
-  - Applies Version Control Strategy (e.g., Rebasing)
 
 - [**Build Automation**](#build-automation)
-  - Implements Full Build Automation
 
 - [**Continuous Integration**](#continuous-integration)
-  - Sets up Continuous Integration Process
 
 - [**Auto Delivery and Deployment**](#auto-delivery-and-deployment)
-  - Implements Automated Delivery and Possibly Deployment
 
 - [**Containerization**](#containerization)
-  - Considers Containerization (When Applicable)
+
 
 ## Conclusion
 
