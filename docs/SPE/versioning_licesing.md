@@ -19,3 +19,5 @@ To manage versioning effectively, we have incorporated the Gradle plugin **org.d
 - **Integration with Gradle:** Seamless integration into the Gradle build system facilitates easy adoption and incorporation into the overall development workflow.
 
 By leveraging the capabilities of this Gradle plugin, we aim to maintain a clear and meaningful version history that reflects the evolution of our project in a systematic and informative manner.
+
+[Go Back.](./index.md) [Go Next.](./index.md)
