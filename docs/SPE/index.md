@@ -19,7 +19,7 @@
 
 - [**Build Automation**](./build_automation.md)
 
-- [**Continuous Integration**](#continuous-integration)
+- [**Continuous Integration**](./CI.md)
 
 - [**Containerization**](./containerization.md)
   
