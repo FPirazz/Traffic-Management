@@ -34,3 +34,5 @@ This approach ensures that changes are thoroughly reviewed before integration, m
 ## Conventional Commits
 
 We adhere to the conventional commits specification for our commit messages. This convention helps in tracking the progress of the project more efficiently and facilitates automated versioning and changelog generation.
+
+[Go Back.](./index.md) [Go Next.](./build_automation.md)
