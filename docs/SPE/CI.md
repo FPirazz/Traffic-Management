@@ -1,5 +1,7 @@
 # Continuous Integration with GitHub Actions
 
+GitHub Actions provides a powerful platform for automating Continuous Integration (CI) workflows, allowing developers to streamline the build and testing processes of their projects directly within their GitHub repositories.
+
 ## Build Gradle Project Workflow
 
 ```yaml
