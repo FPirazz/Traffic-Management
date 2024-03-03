@@ -25,7 +25,7 @@
   
 - [**Orchestration**](./orchestration.md)
 
-- [**Auto Delivery and Deployment**](#auto-delivery-and-deployment)
+- [**Continuous Deployment**](./CD.md)
 
 ## Conclusion
 
