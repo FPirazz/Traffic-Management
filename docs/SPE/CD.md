@@ -46,3 +46,8 @@ The CD workflow is orchestrated using Kubernetes, a container orchestration plat
 AWS plays a crucial role in this CD workflow by hosting the Vue application and the Nginx reverse proxy. The Nginx proxy routes HTTP calls from the browser to the appropriate Kubernetes clusters. AWS services, such as EC2 for virtual servers and S3 for storage, provide a scalable and reliable infrastructure for hosting and serving the application.
 
 This CD approach ensures that changes are seamlessly deployed to the Kubernetes clusters, providing a smooth and efficient development and deployment pipeline.
+
+# Traffic-Management
+Project for both SPA and SPE
+
+[Go Back.](./index.md)
