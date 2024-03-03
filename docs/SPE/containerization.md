@@ -80,3 +80,4 @@ The Dockerfiles are orchestrated using Docker-Compose, a tool simplifying the ma
 
 Running the command `docker compose up` will initiate the Docker containers, automatically executing `gradlew` within them. This fully automates the system, providing a seamless and consistent deployment environment.
 
+[Go Back.](./index.md) [Go Next.](./CD.md)
