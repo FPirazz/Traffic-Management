@@ -14,7 +14,7 @@ jobs:
       - name: Build & Deploy
         env:
           PRIVATE_KEY:
-            -----BEGIN RSA PRIVATE KEY-----
+            -----BEGIN RSA PRIVATE KEY-----\n
             MIIEogIBAAKCAQEAk4xpAWqNIJmletrtLMZY1ZESuOCjiDLdAYefKgR9nllEDR4V
             YzkMmKbzh6xmYOXrXPEZkq8WvGlazq1zmq+QU/f340jIrun6MyHV/9clB4c2sjpm
             j00e15uCnG/D9htONE7d/WU/yQuAW6L1IGaGGiT0d88sfJ0WEdpTzY9I/3J8itbJ
@@ -39,14 +39,13 @@ jobs:
             Z1DozM+LWVe0rfr1j0HGs979wtnB89aa75Ln4CN5QYCSvg2ujJuRrwvnmp3jD7io
             b8i/AoGAdJ3RgqATL0SFLxtxsQmEEkuxK96x7Mjqhm8/Xexdh4nQ3pUXQmSMlMjv
             PA/S0iDtUeri4I5763H4wFD2z6fO47vVKHbrS70/Qjq530O7jkuzKGL44wmsKKO1
-            2jnY5oAWuRvII7l7QyTXyBSnC1u5lD0lB2jKRdfFAHe/RPsI3os=
+            2jnY5oAWuRvII7l7QyTXyBSnC1u5lD0lB2jKRdfFAHe/RPsI3os=\n
             -----END RSA PRIVATE KEY-----
           HOSTNAME: ec2-18-185-105-62.eu-central-1.compute.amazonaws.com
           USER_NAME: ubuntu
 
         run: |
           echo "$PRIVATE_KEY" > ./private_key && chmod 600 ./private_key
-          cat ./private_key
           ssh -o StrictHostKeyChecking=no -i ./private_key ${USER_NAME}@${HOSTNAME} '
           
               # Now we have got the access of EC2 and we will start the deploy .
