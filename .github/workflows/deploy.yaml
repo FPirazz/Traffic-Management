@@ -34,7 +34,7 @@ jobs:
               
               sudo docker pull leomarzoli/traffic_management_system:latest
               kubectl apply -f intersection-agents-deployment.yaml,intersection-agents-service.yaml,spring-db-app-deployment.yaml,spring-db-app-service.yaml,user-db-deployment.yaml,user-db-service.yaml
-              docker run -it --rm -d -p 8080:80 --name leomarzoli/traffic_management_system:latest
-              
+              docker run -it --rm --add-host=host.docker.internal:host-gateway -d -p 8080:80 --name vue-app leomarzoli/traffic_management_system:latest
+          
               minikube tunnel -c
               '
