@@ -28,7 +28,6 @@ jobs:
               kubectl delete --all pods
               sudo docker container delete vue-app
           
-          
               minikube start
               cd my-dashboard/
               
