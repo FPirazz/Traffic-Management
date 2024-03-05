@@ -5,9 +5,6 @@ metadata:
     io.kompose.service: vue-app
   name: vue-app
 spec:
-  clusterIP: 10.105.157.100
-  externalIPs:
-    - 192.01.05.01
   ports:
     - name: "8080"
       port: 8080
@@ -15,4 +12,4 @@ spec:
       nodePort: 30000  # Sostituisci con la porta del nodo desiderata
   selector:
     io.kompose.service: vue-app
-  type: NodePort  # Aggiungi questa riga per specificare il tipo NodePort
+  type: NodePort
