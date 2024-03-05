@@ -15,13 +15,12 @@ jobs:
         env:
           PRIVATE_KEY:
             -----BEGIN RSA PRIVATE KEY-----MIIEogIBAAKCAQEAk4xpAWqNIJmletrtLMZY1ZESuOCjiDLdAYefKgR9nllEDR4VYzkMmKbzh6xmYOXrXPEZkq8WvGlazq1zmq+QU/f340jIrun6MyHV/9clB4c2sjpmj00e15uCnG/D9htONE7d/WU/yQuAW6L1IGaGGiT0d88sfJ0WEdpTzY9I/3J8itbJ4SA9lxAex9V3ou2qPLizOhWcvjtMDbJi8rXZVr2hR/Tv3B3chibxL0QZMaUJr9iVYeppGz5Ga5UcO/FvFUg+VWXjYvP5jmmzQFUv3i6iRdG5t7/n7c6GINom4CjB8elz1PzrTYJU1FelD2zYknmzDFS6DUzDFdtA5Yj6WwIDAQABAoIBAEq4j7DU6fV5efEWj4feRryZBFc2A/sEbyHIMdWQgqE/aZQPCRu/l15zJd8ucoZdyWy++IltO+FcpU0HUAUlJb0wVYv3nxHdkgR0/S/cH3eJhSyLIMcvchAUQ/e/LgkjWN5qlkcuEDhbJ7zAcMzgvsbcsiU+eLP+xV9zJn9yMbCS3VGCFvqAJolDjrENeFXkTgTJjVsylCEOHyV+p62lOfGj8X+D4CjxXdj1QiV5i5D8kPkWnsnUZxBRwkAnRAnxMQdw5gleMUN1JGSFfLfqJAD+1HjpAzZ7hc5zHPzDuk/i2DhrQYGRaM/im/VApyfG0Tv7PuQyaB1x8LahTGWzVpkCgYEA5hBgHEnorzSi5/APRt2z5AFcrPpFNjL7gkJ/uP0dBCvtTQzsyI7UZzuSwLdykhGQkOICrhdLxkbRH8h592kuXJd2frv+cus/vuzuvtIAGZgRHEdTFpSP77JMLcbmO9vJ+wE4EniT1qicyg/ZXSMX9UWRWMxOs4pHOLQQmmGOf6UCgYEApC6lO39L+Shp1grvl9GR5JVY6DcZMnVLfuJY68h/W8ZY/nQ9P1KkyVOIhp79Twt3/4lh3TLqOHDm2TnkK0ExZa7uXIiz6a27tlFWyOqmertuAFyKWGIRrUoOp/xGmO0k2ztsoaFgamJNumgVAV2KlqdnvYSjvyIWQRe0TfVAcf8CgYBSTIFVHUtTgazU85dDboOviJ0yc8TWgp5eFpPCBSmgGGanLXx2skFhPHpe3kDp58ajTXZP+J1urF6a1AhtbP7cuIH3DCEV0vnWvsMZF95ZSYC1cP5UEYj74fhGV+R8fT9fvyvjz6ZzH5YW4lyLaMZlQyGfdlag+1JHAoL99vAW0QKBgErMGWjGsLT9TWI/LzJKPp4V0CBS4b7UIyXWNs6MVEFaVrbt++06WGqEDOHP0vVM80lOrHAavwwhm3oBXsq586gwjtVHTje6d5cy7UexZ1DozM+LWVe0rfr1j0HGs979wtnB89aa75Ln4CN5QYCSvg2ujJuRrwvnmp3jD7iob8i/AoGAdJ3RgqATL0SFLxtxsQmEEkuxK96x7Mjqhm8/Xexdh4nQ3pUXQmSMlMjvPA/S0iDtUeri4I5763H4wFD2z6fO47vVKHbrS70/Qjq530O7jkuzKGL44wmsKKO12jnY5oAWuRvII7l7QyTXyBSnC1u5lD0lB2jKRdfFAHe/RPsI3os=-----END RSA PRIVATE KEY-----
-          HOSTNAME: ec2-18-185-105-62.eu-central-1.compute.amazonaws.com
+          HOSTNAME: ec2-3-79-107-157.eu-central-1.compute.amazonaws.com
           USER_NAME: ubuntu
 
         run: |
           echo "$PRIVATE_KEY" > ./private_key && chmod 600 ./private_key
           cat ./private_key
-          
           ssh -o StrictHostKeyChecking=no -i ./private_key ${USER_NAME}@${HOSTNAME} '
           
               # Now we have got the access of EC2 and we will start the deploy .
