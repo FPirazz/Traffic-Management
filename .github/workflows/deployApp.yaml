@@ -7,7 +7,7 @@ on:
 jobs:
   Deploy:
     name: Deploy to EC2
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -21,6 +21,7 @@ jobs:
           echo "$PRIVATE_KEY" > ./private_key && chmod 600 ./private_key
           cat ./private_key
           ssh -o StrictHostKeyChecking=no -i ./private_key ${USER_NAME}@${HOSTNAME} '
+          
           
               # Now we have got the access of EC2 and we will start the deploy .
               kubectl delete --all svc
