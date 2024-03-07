@@ -40,7 +40,8 @@ name: Deploy Application to AWS EC2 Instance
 on:
   push:
     branches:
-      - testDeploy
+      - prepDeploy
+      - main
 
 jobs:
   Deploy:
