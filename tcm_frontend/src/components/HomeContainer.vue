@@ -7,9 +7,9 @@
 
       <div class="container py-5">
         <header class="text-left text-white py-5">
-          <h3 class="mb-4 rounded"><a href="#start-shopping" class="bg-white px-2 py-2 rounded" id="heading">E-Fit</a></h3>
-          <p id="content" class="lead mb-0 bg-dark p-1 rounded">Palestra completamente a distanza per seguire tutte le tue esigenze.
-            <br>Non andare in palestra! Veniamo noi da te! Acquista subito i nostri corsi nelle pagine E-Fit dedicate.
+          <h3 class="mb-4 rounded"><a href="#start-shopping" class="bg-white px-2 py-2 rounded" id="heading">Traffic Management and Monitoring System</a></h3>
+          <p id="content" class="lead mb-0 bg-dark p-1 rounded">System built ad-hoc in order to manage and monitor intersection.
+            <br>Register and login right away in order to use our services!
           </p>
         </header>
       </div>
