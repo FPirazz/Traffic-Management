@@ -5,9 +5,9 @@
 Our Git repository is organized with three primary branches:
 
 - **main:** Represents the production-ready code. Official releases are merged into this branch at the end of the project.
-- **dev:** The development branch where active development takes place. New features and bug fixes are developed here.
+- **develop:** The development branch where active development takes place. New features and bug fixes are developed here.
+- **prepDeploy:** The preparations and testing for future deployments are done on this branch, usually by mergin changes made on develop.
 - **doc:** Dedicated to documentation updates. Changes related to documentation are made and committed in this branch.
-
 ## Git Rebase Policy
 
 We have adopted a rebase policy to maintain a clean and linear project history. When working on the dev branch, instead of merging changes from main, we use interactive rebasing to integrate the latest changes. This keeps the commit history streamlined and avoids unnecessary merge commits.
@@ -27,7 +27,8 @@ Our development workflow includes the following steps:
 1. Developers create a feature branch from dev for new features or bug fixes.
 2. After completing the development, developers submit a pull request.
 3. Pull requests require approval from at least two reviewers, considering our group size of three members.
-4. Once the pull request is approved, it can be merged into the dev branch.
+4. Once the pull request is approved, it can be rebased into the dev branch.
+5. Thereafter, once the rebase is done and has been verified, the feature branch is deleted.
 
 This approach ensures that changes are thoroughly reviewed before integration, maintaining code quality and consistency.
 
