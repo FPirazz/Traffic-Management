@@ -19,13 +19,13 @@
 
 - [**Build Automation**](./build_automation.md)
 
+- [**Continuous Deployment**](./CD.md)
+
 - [**Continuous Integration**](./CI.md)
 
 - [**Containerization**](./containerization.md)
   
 - [**Orchestration**](./orchestration.md)
-
-- [**Continuous Deployment**](./CD.md)
 
 ## Conclusion
 
