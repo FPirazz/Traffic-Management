@@ -12,7 +12,9 @@ Knowledge Crunching was executed using an Event Storming methodology, facilitate
 
 Miro simplified this process by enabling the construction of a Mind Map. This map contained key concepts related to the project's environment. Using words and connecting them, hierarchies of concepts were formed to enhance the understanding of the domain.
 
-![Mind_map_of_the_system](./relative_path/to/img.jpg?raw=true)
+<p align="center">
+  <img src="./img/mind-map.jpg" alt="./img/mind-map.jpg"/>
+</p>
 
 # Knowledge Crunching: Ubiquitous Language and Requirements Analysis
 
