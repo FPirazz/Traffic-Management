@@ -47,7 +47,5 @@ AWS plays a crucial role in this CD workflow by hosting the Vue application and 
 
 This CD approach ensures that changes are seamlessly deployed to the Kubernetes clusters, providing a smooth and efficient development and deployment pipeline.
 
-# Traffic-Management
-Project for both SPA and SPE
 
 [Go Back.](./index.md)
