@@ -59,7 +59,10 @@ The Requirements Analysis, stemming from Knowledge Crunching, details high-level
 
 ## Context Map
 
-![Context_Map_of_The_System.](./relative_path/to/img.jpg?raw=true)
+<p align="center">
+  <img src="./img/context-map1.png" alt="./img/context-map1.png"/>
+  <img src="./img/context-map2.png" alt="./img/context-map2.png"/>
+</p>
 
 
 [Go Back.](./index.md)
