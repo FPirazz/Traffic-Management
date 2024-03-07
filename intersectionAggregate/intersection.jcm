@@ -1,0 +1,25 @@
+mas intersection {
+
+    agent tr1 : trafficLight1.asl {
+        focus: intersection.intersection
+    }
+
+    agent tr2 : trafficLight2.asl {
+        focus: intersection.intersection
+    }
+
+    agent tr3 : trafficLight3.asl {
+        focus: intersection.intersection
+    }
+
+    agent tr4 : trafficLight4.asl {
+        focus: intersection.intersection
+    }
+
+    workspace intersection {
+        artifact intersection: acme.Intersection()
+    }
+
+    platform: jacamo.rest.JCMRest("--rest-port 9080 --registerURL http://127.0.0.1/")
+
+}

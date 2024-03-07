@@ -1,0 +1,55 @@
+version: "3.7"
+
+services:
+
+  vue-app:
+    build:
+      context: tcm_frontend
+      dockerfile: Dockerfile
+    container_name: vue-app
+    restart: always
+    ports:
+      - "8080:80"
+
+  user-db:
+    image: "fpirazzoli/sap_spe_db:latest"
+    container_name: user-db
+    restart: always
+    ports:
+      - "8082:8082"
+      - "9092:9092"
+
+  spring-db-app:
+    build:
+      context: src/main/userContext
+      dockerfile: Dockerfile
+    container_name: spring-db-app
+    restart: always
+    ports:
+      - "9085:9085"
+
+  intersection-agents:
+    build:
+      context: intersectionAggregate
+      dockerfile: Dockerfile
+    container_name: intersection-agents
+    restart: always
+    ports:
+      - "9080:9080"
+#  nginx:
+#    image: "nginx:latest"
+#    container_name: nginx
+#    restart: always
+#    ports:
+#      - "8085:80"
+
+    #Per aggiungere un nuovo servizio
+  #Seguire il template:
+
+  #nome-servizio:
+    #image:
+    #ports:
+    #container-name:
+    # ecc.. ecc... (cambia a seconda delle necessità ma questi 3 sono quasi sempre obbligatori).
+
+  #Eseguire il comando "docker compose up" e fa tutto lui.

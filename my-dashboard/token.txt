@@ -1,0 +1,5 @@
+Eseguire il seguente comando:
+kubectl -n kubernetes-dashboard create token admin-user
+
+
+Poi copia-incollare il token generato nella pagina di accesso della dashboard.
